@@ -234,10 +234,27 @@ pub fn try_run_kniti_for_dhatu(p: &mut Prakriya, i: usize) -> Option<()> {
 ///
 /// (6.4.98 - 6.4.126)
 fn try_run_kniti(p: &mut Prakriya, i: usize) -> Option<()> {
-    let anga = p.get(i)?;
     let j = p.next_not_empty(i)?;
-    let n = p.pratyaya(j)?;
 
+    // 7.3.70 (ghor lopo leṭi vā): "for ghu dhātus (dā, dhā), [the antya] is
+    // optionally elided under leṬ." This gives both `dadhat` (weak, elided)
+    // and `dadhāti` (strong, retained) as alternates for non-Uttama; for
+    // Uttama corpus mostly retains the long ā (`dadhāni`, `dadhāma`) but
+    // the rule's optionality permits both.
+    {
+        let anga = p.get(i)?;
+        let n = p.pratyaya(j)?;
+        let fire_7_3_70 = anga.has_tag(T::Ghu)
+            && anga.has_antya('A')
+            && n.has_tag(T::Sarvadhatuka)
+            && n.last().has_lakara(Let);
+        if fire_7_3_70 {
+            p.optional_run_at("7.3.70", i, op::antya_lopa);
+        }
+    }
+
+    let anga = p.get(i)?;
+    let n = p.pratyaya(j)?;
     if !n.is_knit() {
         return None;
     }

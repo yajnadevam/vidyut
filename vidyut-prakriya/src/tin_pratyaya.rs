@@ -129,12 +129,28 @@ fn siddhi(p: &mut Prakriya, la: Lakara) -> Option<()> {
             op::adesha("3.4.89", p, i, "ni");
         }
 
-        let agama = if uses_sip_vikarana(p, i_dhatu) {
+        // 3.4.94 lewo'qAwO — leṬ takes aṭ or āṭ. We pick based on the
+        // stem-final phonology so the agama produces the right surface
+        // form without relying on a+a sandhi (which doesn't always fire
+        // cleanly across stem+vikaraṇa+agama boundaries):
+        //   - stem ends in 'a' (most class 1, 6, 10): āṭ would duplicate
+        //     the contraction (bhava+ā=bhavā), so use aṭ which becomes
+        //     long via 6.1.101 a+a sandhi. Either gives `bhavāti`.
+        //   - stem ends in consonant (class 2, 5, 7, etc.): use aṭ
+        //     directly; no sandhi to lengthen — matches corpus (e.g.,
+        //     `asat`, not `asāt`).
+        // The earlier `uses_sip_vikarana` carve-out is preserved for
+        // juzī~/tF/madi~ where vidyut adds the sip-vikaraṇa (3.1.34).
+        let prev_text = p.terms().iter().take(i).rev()
+            .find(|t| !t.text.is_empty())
+            .map(|t| t.text.clone())
+            .unwrap_or_default();
+        let stem_ends_in_a = prev_text.ends_with('a');
+        let agama = if uses_sip_vikarana(p, i_dhatu) || !stem_ends_in_a {
             A::aw
         } else {
             A::Aw
         };
-        // 3.4.94 inserts the agama and marks the pratyaya pit.
         p.run("3.4.94", |p| {
             p.set(i, |t| t.add_tag(T::pit));
             p.insert(i, agama);
@@ -156,6 +172,15 @@ fn siddhi(p: &mut Prakriya, la: Lakara) -> Option<()> {
             // karavAva, karavAma; karavAvaH, karavAmaH. Covers the vārttika
             // *leṭsambandhin uttamapuruṣasya sakārasya vā lopo bhavati*.
             p.optional_run_at("3.4.98", i, op::antya_lopa);
+        }
+
+        // 3.4.93 generalized for leṬ ātmanepada Uttama: e → ai (E in SLP1).
+        // Under leṬ, Uttama atm pratyayas have an alternate -ai-final form
+        // (modal-a fused with -e). Corpus: anaśāmahai (1pl), bravāvahai
+        // (1du), kṛṇavai (1sg). Optional — both -e and -ai forms occur.
+        let tin = p.get(i)?;
+        if p.has_tag(PT::Uttama) && tin.is_atmanepada() && tin.has_antya('e') {
+            p.optional_run_at("3.4.93", i, op::antya("E"));
         }
 
         // 3.4.97 generalized: under leṬ, the final -i of any parasmaipada
