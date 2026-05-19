@@ -169,9 +169,13 @@ impl Lakara {
 
     /// Returns whether or not this lakara will be termed sArvadhAtuka.
     pub(crate) fn is_sarvadhatuka(&self) -> bool {
+        // Per Pāṇini 3.4.113 (tiṅ-śit sārvadhātukam), all tiṅ-pratyayas are
+        // sārvadhātuka by default. 3.4.115 (liṭ ca) and 3.4.116 (liṅāśiṣi)
+        // carve out liṭ and āśīr-liṅ as ārdhadhātuka. leṬ has no carve-out
+        // and so falls under the default sārvadhātuka classification.
         matches!(
             self,
-            Lakara::Lat | Lakara::Lot | Lakara::Lan | Lakara::VidhiLin
+            Lakara::Lat | Lakara::Lot | Lakara::Lan | Lakara::VidhiLin | Lakara::Let
         )
     }
 
