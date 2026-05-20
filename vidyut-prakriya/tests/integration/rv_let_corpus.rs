@@ -76,29 +76,74 @@ fn clean_upadesha(s: &str) -> String {
 fn match_keys(upadesha: &str) -> Vec<String> {
     let cleaned = clean_upadesha(upadesha);
     let mut keys = std::collections::HashSet::new();
-    keys.insert(cleaned.clone());
 
-    let stripped_cons: String = cleaned
-        .trim_end_matches(|c: char| {
-            matches!(c, 'Y' | 'N' | 'M' | 'K' | 'G' | 'C' | 'J' | 'W' | 'Q' | 'P' | 'B' | 'R' | 'z' | 'S')
-        })
-        .to_string();
-    if stripped_cons != cleaned {
-        keys.insert(stripped_cons.clone());
+    // Step 1: collect "consonant-stripping" variants (trim trailing
+    // anubandha-like consonants iteratively).
+    let mut bases: Vec<String> = vec![cleaned.clone()];
+    let trim_cons = |s: &str| -> String {
+        s.trim_end_matches(|c: char| {
+            matches!(c,
+                'Y' | 'N' | 'M' | 'K' | 'G' | 'C' | 'J' | 'W' | 'Q' |
+                'P' | 'B' | 'R' | 'z' | 'S' | 'r' | 'l' | 'h')
+        }).to_string()
+    };
+    let mut last_base = cleaned.clone();
+    loop {
+        let s1 = trim_cons(&last_base);
+        if s1 == last_base { break; }
+        bases.push(s1.clone());
+        // Also try stripping a trailing iṭ-marker vowel (i/I), then continue.
+        if let Some(last) = s1.chars().last() {
+            if matches!(last, 'i' | 'I' | 'u' | 'U' | 'a') && s1.len() > 1 {
+                let without = s1[..s1.len() - last.len_utf8()].to_string();
+                if !without.is_empty() {
+                    bases.push(without.clone());
+                    last_base = without;
+                    continue;
+                }
+            }
+        }
+        last_base = s1;
     }
 
-    for base in [cleaned.clone(), stripped_cons.clone()] {
+    // Step 2: also strip trailing vowels of the original cleaned form.
+    let mut more: Vec<String> = vec![];
+    for base in &bases {
         if base.len() > 1 {
             let last = base.chars().last().unwrap();
             if matches!(last, 'a' | 'i' | 'u' | 'I' | 'U' | 'f' | 'F') {
                 let without = base[..base.len() - last.len_utf8()].to_string();
                 if !without.is_empty() {
-                    keys.insert(without);
+                    more.push(without);
                 }
             }
         }
     }
+    bases.extend(more);
 
+    // Step 3: also generate retroflex/dental normalization variants.
+    // Corpus uses dental n/ṣ for what dhātupāṭha may write as retroflex Ṇ/Ṣ
+    // (especially for dhātus with internal-retroflex initial like Ra\Sa~).
+    let mut normalized: Vec<String> = vec![];
+    for base in &bases {
+        // R (retroflex ṇ) → n
+        if base.contains('R') {
+            normalized.push(base.replace('R', "n"));
+        }
+        // z (retroflex ṣ) → s
+        if base.contains('z') {
+            normalized.push(base.replace('z', "s"));
+        }
+        // Both
+        if base.contains('R') || base.contains('z') {
+            normalized.push(base.replace('R', "n").replace('z', "s"));
+        }
+    }
+    bases.extend(normalized);
+
+    for b in bases {
+        keys.insert(b);
+    }
     keys.into_iter().collect()
 }
 

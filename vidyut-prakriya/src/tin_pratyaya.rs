@@ -235,8 +235,8 @@ fn siddhi(p: &mut Prakriya, la: Lakara) -> Option<()> {
         // optionally luk-elides entirely, yielding the bare-ā 1sg subjunctive
         // (RV: 31 attested forms — kṛṇavā, bharā, bravā, stavā, arcā, ayā,
         // karā, vocā, etc.). For bhū this gives bhavā alongside bhavāni.
-        // TODO Add vartika/grammar reference in varttikas.tsv
-        // See Macdonell's Vedic grammar for leṭ (from laṭ stem)
+        // See vārttika 3.4.98.v1 in data/varttikas.tsv.
+        // See also Macdonell's Vedic grammar for leṭ (from laṭ stem)
         // https://archive.org/details/cu31924023050325/page/n325/mode/2up
         let tin = p.get(i)?;
         if p.has_tag(PT::Uttama) && tin.has_tag(T::Ekavacana) && tin.is_parasmaipada() {
