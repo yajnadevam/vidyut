@@ -150,7 +150,16 @@ fn siddhi(p: &mut Prakriya, la: Lakara) -> Option<()> {
             .map(|t| t.text.clone())
             .unwrap_or_default();
         let stem_ends_in_a = prev_text.ends_with('a');
-        let agama = if uses_sip_vikarana(p, i_dhatu) || !stem_ends_in_a {
+        // For leṬ-on-luṄ-stem (Phase 4), always use aṭ — the corpus
+        // consistently shows the short-a agama (karat, śravat, sakat).
+        // 6.1.101 (a+a → ā) handles the a-final-stem cases (manāmahe).
+        let is_lun_stem = p.has_tag(PT::FlagLetStemLun);
+        // For leṬ-on-liṬ-stem (Phase 5), 3.4.94 leaves the choice between
+        // aṭ and āṭ open. The reduplicated perfect stem is consonant-final,
+        // so 6.1.101 sandhi never lengthens — only āṭ gives the long-ā
+        // forms (papṛcāsi). Try both branches.
+        let is_lit_stem = p.has_tag(PT::FlagLetStemLit);
+        let agama = if is_lun_stem || uses_sip_vikarana(p, i_dhatu) || !stem_ends_in_a {
             A::aw
         } else {
             A::Aw
@@ -175,10 +184,27 @@ fn siddhi(p: &mut Prakriya, la: Lakara) -> Option<()> {
             }
         }
         if agama_inserted {
-            p.run("3.4.94", |p| {
-                p.set(i, |t| t.add_tag(T::pit));
-                p.insert(i, agama);
-            });
+            // For leṬ-on-liṬ-stem: 3.4.94 leaves aṭ/āṭ open. The default
+            // `agama` value above is aṭ for the consonant-final reduplicated
+            // stem; here we also try āṭ as an optional branch so the long-ā
+            // forms (papṛcāsi, jujozāt) are reachable.
+            if is_lit_stem && agama == A::aw {
+                let inserted_long = p.optional_run("3.4.94", |p| {
+                    p.set(i, |t| t.add_tag(T::pit));
+                    p.insert(i, A::Aw);
+                });
+                if !inserted_long {
+                    p.run("3.4.94", |p| {
+                        p.set(i, |t| t.add_tag(T::pit));
+                        p.insert(i, A::aw);
+                    });
+                }
+            } else {
+                p.run("3.4.94", |p| {
+                    p.set(i, |t| t.add_tag(T::pit));
+                    p.insert(i, agama);
+                });
+            }
             it_samjna::run(p, i).ok()?;
         }
 

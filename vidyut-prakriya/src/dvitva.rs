@@ -8,6 +8,7 @@ use crate::args::Lakara::*;
 use crate::args::Sanadi as S;
 use crate::args::Vikarana as V;
 use crate::core::operators as op;
+use crate::core::PrakriyaTag as PT;
 use crate::core::Rule::{Kashika, Varttika};
 use crate::core::Tag as T;
 use crate::core::Term;
@@ -310,7 +311,8 @@ fn run_at_index(p: &mut Prakriya, i: usize) -> Option<()> {
         !(t.is_agama() && t.has_tag(T::kit) && !t.is_it_agama())
     })?;
     let n = p.pratyaya(i_n)?;
-    if n.has_lakara(Lit) {
+    let is_let_lit_stem = n.has_lakara(Let) && p.has_tag(PT::FlagLetStemLit);
+    if n.has_lakara(Lit) || is_let_lit_stem {
         let dhatu = p.get(i)?;
         // kAshikA:
         //   dayateḥ iti dīṅo grahaṇaṃ na tu daya dāne ityasya.

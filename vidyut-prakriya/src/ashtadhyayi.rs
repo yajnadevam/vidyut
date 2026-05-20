@@ -26,8 +26,8 @@ the sutrapatha by grepping over our code.
 use crate::angasya;
 use crate::ardhadhatuka;
 use crate::args::{
-    Artha, BasicPratipadika, Dhatu, Krdanta, Krt, Lakara, Pada, Pratipadika, Prayoga, Samasa,
-    Sanadi, Subanta, Sup, Taddhitanta, Tinanta, Upasarga,
+    Artha, BasicPratipadika, Dhatu, Krdanta, Krt, Lakara, LetStem, Pada, Pratipadika, Prayoga,
+    Samasa, Sanadi, Subanta, Sup, Taddhitanta, Tinanta, Upasarga,
 };
 use crate::atidesha;
 use crate::atmanepada;
@@ -712,6 +712,15 @@ pub fn derive_tinanta(mut prakriya: Prakriya, args: &Tinanta) -> Result<Prakriya
     )?;
     // Add these AFTER `prepare_dhatu` for better caching.
     p.add_tags(&[purusha.as_tag().into(), vacana.as_tag().into()]);
+
+    // Record the leṬ stem choice (Lun/Lit). Default (Lat) is left unflagged.
+    if lakara == Lakara::Let {
+        match args.let_stem() {
+            Some(LetStem::Lun) => p.add_tag(PT::FlagLetStemLun),
+            Some(LetStem::Lit) => p.add_tag(PT::FlagLetStemLit),
+            Some(LetStem::Lat) | None => {}
+        }
+    }
 
     add_lakara_and_decide_pada(p, lakara);
     tin_pratyaya::adesha(p, purusha, vacana);
