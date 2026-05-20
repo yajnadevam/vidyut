@@ -141,7 +141,11 @@ fn siddhi(p: &mut Prakriya, la: Lakara) -> Option<()> {
         //     `asat`, not `asāt`).
         // The earlier `uses_sip_vikarana` carve-out is preserved for
         // juzī~/tF/madi~ where vidyut adds the sip-vikaraṇa (3.1.34).
-        let prev_text = p.terms().iter().take(i).rev()
+        let prev_text = p
+            .terms()
+            .iter()
+            .take(i)
+            .rev()
             .find(|t| !t.text.is_empty())
             .map(|t| t.text.clone())
             .unwrap_or_default();
@@ -204,8 +208,7 @@ fn siddhi(p: &mut Prakriya, la: Lakara) -> Option<()> {
         // e→ai there would give the overgenerated -EtE form (e.g.,
         // mantrayEtE) which isn't corpus-attested.
         let tin = p.get(i)?;
-        let exclude_non_uttama_dual = tin.has_tag(T::Dvivacana)
-            && !p.has_tag(PT::Uttama);
+        let exclude_non_uttama_dual = tin.has_tag(T::Dvivacana) && !p.has_tag(PT::Uttama);
         if tin.is_atmanepada() && tin.has_antya('e') && !exclude_non_uttama_dual {
             p.optional_run_at("3.4.93", i, op::antya("E"));
         }

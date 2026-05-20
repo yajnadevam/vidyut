@@ -34,11 +34,16 @@ fn iast_to_slp1(s: &str) -> String {
         let next = chars.get(i + 1).copied();
         if next == Some('h') {
             let asp = match c {
-                'k' => Some('K'), 'g' => Some('G'),
-                'c' => Some('C'), 'j' => Some('J'),
-                'ṭ' => Some('W'), 'ḍ' => Some('Q'),
-                't' => Some('T'), 'd' => Some('D'),
-                'p' => Some('P'), 'b' => Some('B'),
+                'k' => Some('K'),
+                'g' => Some('G'),
+                'c' => Some('C'),
+                'j' => Some('J'),
+                'ṭ' => Some('W'),
+                'ḍ' => Some('Q'),
+                't' => Some('T'),
+                'd' => Some('D'),
+                'p' => Some('P'),
+                'b' => Some('B'),
                 _ => None,
             };
             if let Some(a) = asp {
@@ -48,17 +53,38 @@ fn iast_to_slp1(s: &str) -> String {
             }
         }
         let m: &str = match c {
-            'ā' => "A", 'ī' => "I", 'ū' => "U",
-            'ṛ' => "f", 'ṝ' => "F", 'ḷ' => "x", 'ḹ' => "X",
-            'ṅ' => "N", 'ñ' => "Y",
-            'ṭ' => "w", 'ḍ' => "q", 'ṇ' => "R",
-            'ś' => "S", 'ṣ' => "z", 'ṃ' => "M", 'ḥ' => "H",
+            'ā' => "A",
+            'ī' => "I",
+            'ū' => "U",
+            'ṛ' => "f",
+            'ṝ' => "F",
+            'ḷ' => "x",
+            'ḹ' => "X",
+            'ṅ' => "N",
+            'ñ' => "Y",
+            'ṭ' => "w",
+            'ḍ' => "q",
+            'ṇ' => "R",
+            'ś' => "S",
+            'ṣ' => "z",
+            'ṃ' => "M",
+            'ḥ' => "H",
             'a' => {
-                if next == Some('i') { i += 1; "E" }
-                else if next == Some('u') { i += 1; "O" }
-                else { "a" }
+                if next == Some('i') {
+                    i += 1;
+                    "E"
+                } else if next == Some('u') {
+                    i += 1;
+                    "O"
+                } else {
+                    "a"
+                }
             }
-            _ => { out.push(c); i += 1; continue; }
+            _ => {
+                out.push(c);
+                i += 1;
+                continue;
+            }
         };
         out.push_str(m);
         i += 1;
@@ -67,7 +93,8 @@ fn iast_to_slp1(s: &str) -> String {
 }
 
 fn clean_upadesha(s: &str) -> String {
-    let stripped: String = s.chars()
+    let stripped: String = s
+        .chars()
         .filter(|c| !matches!(*c, '~' | '^' | '\\' | '`' | '!'))
         .collect();
     stripped.strip_prefix("qu").unwrap_or(&stripped).to_string()
@@ -82,15 +109,34 @@ fn match_keys(upadesha: &str) -> Vec<String> {
     let mut bases: Vec<String> = vec![cleaned.clone()];
     let trim_cons = |s: &str| -> String {
         s.trim_end_matches(|c: char| {
-            matches!(c,
-                'Y' | 'N' | 'M' | 'K' | 'G' | 'C' | 'J' | 'W' | 'Q' |
-                'P' | 'B' | 'R' | 'z' | 'S' | 'r' | 'l' | 'h')
-        }).to_string()
+            matches!(
+                c,
+                'Y' | 'N'
+                    | 'M'
+                    | 'K'
+                    | 'G'
+                    | 'C'
+                    | 'J'
+                    | 'W'
+                    | 'Q'
+                    | 'P'
+                    | 'B'
+                    | 'R'
+                    | 'z'
+                    | 'S'
+                    | 'r'
+                    | 'l'
+                    | 'h'
+            )
+        })
+        .to_string()
     };
     let mut last_base = cleaned.clone();
     loop {
         let s1 = trim_cons(&last_base);
-        if s1 == last_base { break; }
+        if s1 == last_base {
+            break;
+        }
         bases.push(s1.clone());
         // Also try stripping a trailing iṭ-marker vowel (i/I), then continue.
         if let Some(last) = s1.chars().last() {
@@ -172,8 +218,11 @@ fn rv_let_corpus_all_forms_match() {
     let dp = Dhatupatha::from_path(&dp_path).expect("dhatupatha load");
     let mut by_lemma: HashMap<String, Vec<Dhatu>> = HashMap::new();
     for entry in dp.iter() {
-        let upad = entry.dhatu().aupadeshika()
-            .map(|s| s.to_string()).unwrap_or_default();
+        let upad = entry
+            .dhatu()
+            .aupadeshika()
+            .map(|s| s.to_string())
+            .unwrap_or_default();
         for key in match_keys(&upad) {
             by_lemma.entry(key).or_default().push(entry.dhatu().clone());
         }
@@ -190,15 +239,23 @@ fn rv_let_corpus_all_forms_match() {
 
     for line in lines {
         let fields: Vec<&str> = line.split('\t').collect();
-        if fields.len() < 10 { continue; }
+        if fields.len() < 10 {
+            continue;
+        }
         let cit = fields[0];
         let surface_iast = fields[3];
         let lemma_iast = fields[4];
         let p_str = fields[7];
         let n_str = fields[8];
 
-        let purusha = match purusha_from(p_str) { Some(x) => x, None => continue };
-        let vacana = match vacana_from(n_str) { Some(x) => x, None => continue };
+        let purusha = match purusha_from(p_str) {
+            Some(x) => x,
+            None => continue,
+        };
+        let vacana = match vacana_from(n_str) {
+            Some(x) => x,
+            None => continue,
+        };
         let surface_slp = iast_to_slp1(surface_iast);
         let lemma_slp = iast_to_slp1(lemma_iast);
 
@@ -206,7 +263,10 @@ fn rv_let_corpus_all_forms_match() {
 
         let candidates = match by_lemma.get(&lemma_slp) {
             Some(v) => v.clone(),
-            None => { matcher_gap += 1; continue; }
+            None => {
+                matcher_gap += 1;
+                continue;
+            }
         };
 
         let mut all_outputs: Vec<String> = vec![];
@@ -225,7 +285,9 @@ fn rv_let_corpus_all_forms_match() {
             };
             for p in v.derive_tinantas(&tin) {
                 let t = p.text();
-                if t == surface_slp { found = true; }
+                if t == surface_slp {
+                    found = true;
+                }
                 all_outputs.push(t);
             }
         }
@@ -236,31 +298,49 @@ fn rv_let_corpus_all_forms_match() {
             all_outputs.sort();
             all_outputs.dedup();
             failures.push((
-                cit.into(), surface_slp, lemma_slp,
-                p_str.into(), n_str.into(), all_outputs,
+                cit.into(),
+                surface_slp,
+                lemma_slp,
+                p_str.into(),
+                n_str.into(),
+                all_outputs,
             ));
         }
     }
 
     let testable = total - matcher_gap;
-    let report_lines: Vec<String> = failures.iter()
+    let report_lines: Vec<String> = failures
+        .iter()
         .map(|(cit, surf, lem, p, n, out)| {
-            let out_str = if out.is_empty() { "(empty)".into() } else { out.join(", ") };
-            format!("  {:<12} expected={:<22} lemma={:<10} p={} n={} got=[{}]",
-                cit, surf, lem, p, n, out_str)
+            let out_str = if out.is_empty() {
+                "(empty)".into()
+            } else {
+                out.join(", ")
+            };
+            format!(
+                "  {:<12} expected={:<22} lemma={:<10} p={} n={} got=[{}]",
+                cit, surf, lem, p, n, out_str
+            )
         })
         .collect();
 
     if !failures.is_empty() {
         // Limit to first 30 lines to keep CI log manageable; print count.
-        let preview = report_lines.iter().take(30).cloned().collect::<Vec<_>>().join("\n");
+        let preview = report_lines
+            .iter()
+            .take(30)
+            .cloned()
+            .collect::<Vec<_>>()
+            .join("\n");
         panic!(
             "\n\nRV leṬ corpus: {matched}/{testable} testable forms match ({:.1}%) — \
              {} failing forms; {matcher_gap} forms skipped due to matcher gap; \
              {total} total in corpus.\n\nFirst 30 of {} failures:\n{}\n\n\
              (Full list available by running examples/validate_let_corpus)\n",
             100.0 * matched as f64 / testable as f64,
-            failures.len(), failures.len(), preview
+            failures.len(),
+            failures.len(),
+            preview
         );
     }
 }
