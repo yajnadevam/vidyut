@@ -621,16 +621,29 @@ pub fn run(p: &mut Prakriya) -> Option<()> {
             p.run(code, add_vikarana(sya));
         }
     } else if last.has_lakara(Let) {
-        if uses_sip_vikarana(p, i_dhatu) {
+        // 3.1.34 (siB bahulaM leTi): sip-vikaraṇa fires "frequently" under
+        // leṬ. For the well-attested triad juz/mand/tF, vidyut applies it
+        // mandatorily (giving jozizat/mandizat/tArizat). For other dhātus
+        // (yaj, vah, śru) where corpus shows BOTH a sip-form (yakzi, vakzi,
+        // Srozi) and a non-sip form (yajāti, vahāti, śṛṇavat), we make it
+        // OPTIONAL so both branches are produced.
+        let dhatu = p.get(i_dhatu)?;
+        let is_mandatory_sip = dhatu.has_text_in(&["juz", "mand"]) || dhatu.has_u("tF");
+        let is_optional_sip = dhatu.has_text_in(&["yaj", "vah", "Sru"]);
+
+        if is_mandatory_sip {
             // jozizat, mandizat, tArizat
             p.run("3.1.34", add_vikarana(sip));
-
             let dhatu = p.get(i_dhatu)?;
             if dhatu.has_u("tF") {
                 // sib bahulaM RidvaktavyaH
                 // tArizat
                 p.run_at(Varttika("3.1.34.1"), i_dhatu + 1, |t| t.add_tag(T::Rit));
             }
+        } else if is_optional_sip {
+            // yakzi, vakzi, Srozi (corpus): optional sip-vikaraṇa for 2sg
+            // paras + others. The non-sip branch produces regular leṬ.
+            p.optional_run("3.1.34", add_vikarana(sip));
         }
     } else if last.has_lakara(Lot) {
         // Just for vidāṅkurvantu, etc.

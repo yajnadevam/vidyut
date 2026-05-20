@@ -151,13 +151,34 @@ fn siddhi(p: &mut Prakriya, la: Lakara) -> Option<()> {
         } else {
             A::Aw
         };
-        p.run("3.4.94", |p| {
-            p.set(i, |t| t.add_tag(T::pit));
-            p.insert(i, agama);
-        });
-        it_samjna::run(p, i).ok()?;
 
-        let i = i + 1;
+        // Special case: when sip-vikaraṇa was applied AND the pratyaya is
+        // sip (2sg paras), the modal-a-agama is optionally omitted. This
+        // gives the Vedic s-aorist 2sg paras forms like yakzi, vakzi
+        // (vs. agama-inserted yakzasi). 8.2.36 + 8.2.41 + sandhi fire on
+        // the no-agama branch giving the corpus form.
+        let has_sip_vikarana = p.terms().iter().any(|t| t.is(crate::args::Vikarana::sip));
+        let skip_agama = has_sip_vikarana && p.has(i, |t| t.is(Tin::sip));
+
+        let mut agama_inserted = true;
+        if skip_agama {
+            // Optional no-agama branch.
+            let skipped = p.optional_run("3.4.94.v2", |p| {
+                p.set(i, |t| t.add_tag(T::pit));
+            });
+            if skipped {
+                agama_inserted = false;
+            }
+        }
+        if agama_inserted {
+            p.run("3.4.94", |p| {
+                p.set(i, |t| t.add_tag(T::pit));
+                p.insert(i, agama);
+            });
+            it_samjna::run(p, i).ok()?;
+        }
+
+        let i = if agama_inserted { i + 1 } else { i };
         let tin = p.get(i)?;
         if tin.has_adi('A') {
             // mantrayEte, mantrayETe ,...
@@ -174,12 +195,18 @@ fn siddhi(p: &mut Prakriya, la: Lakara) -> Option<()> {
             p.optional_run_at("3.4.98", i, op::antya_lopa);
         }
 
-        // 3.4.93 generalized for leṬ ātmanepada Uttama: e → ai (E in SLP1).
-        // Under leṬ, Uttama atm pratyayas have an alternate -ai-final form
-        // (modal-a fused with -e). Corpus: anaśāmahai (1pl), bravāvahai
-        // (1du), kṛṇavai (1sg). Optional — both -e and -ai forms occur.
+        // 3.4.93 generalized for leṬ ātmanepada: e → ai (E in SLP1).
+        // Under leṬ, atm pratyayas have an alternate -ai-final form. Corpus:
+        // anaśāmahai/bravāvahai/kṛṇavai (Uttama), yajātai (3sg).
+        //
+        // Excluded: non-Uttama atm DUAL cells, which already get the dual
+        // -aite (= -Ete in SLP1) form via 3.4.95 ata→ai. Adding a further
+        // e→ai there would give the overgenerated -EtE form (e.g.,
+        // mantrayEtE) which isn't corpus-attested.
         let tin = p.get(i)?;
-        if p.has_tag(PT::Uttama) && tin.is_atmanepada() && tin.has_antya('e') {
+        let exclude_non_uttama_dual = tin.has_tag(T::Dvivacana)
+            && !p.has_tag(PT::Uttama);
+        if tin.is_atmanepada() && tin.has_antya('e') && !exclude_non_uttama_dual {
             p.optional_run_at("3.4.93", i, op::antya("E"));
         }
 
@@ -215,6 +242,13 @@ fn siddhi(p: &mut Prakriya, la: Lakara) -> Option<()> {
         if p.has_tag(PT::Uttama) && tin.has_tag(T::Ekavacana) && tin.is_parasmaipada() {
             p.optional_run_at("3.4.98.v1", i, op::lopa);
         }
+
+        // Note: Vedic pādānta lengthening (final -a → -ā at line-end) is
+        // attested in ~6 corpus forms (kṛṇavāmā, carātā, etc.) but is
+        // meter-driven, not phonological. Generating it as a free alternate
+        // produces unattested forms like `bhavātā` 2pl paras that conflict
+        // with the manual kashika test expectations. Deferred to a future
+        // phase that handles meter context.
     } else if tin.has_lakara(Lot) {
         // Applies tin-siddhi rules that apply to just loT.
         if tin.is(Tin::sip) {
