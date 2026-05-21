@@ -333,17 +333,14 @@ pub fn run(p: &mut Prakriya) -> Option<()> {
     } else if dhatu.has_tag_in(&[T::Nit, T::anudattet]) && !dhatu.is_empty() {
         // Check `is_empty` is to skip yaN-luk.
         // eDate
-        // Under leṬ (Vedic subjunctive), Whitney §720: the strict dhātupāṭha
-        // pada distinction is relaxed; many dhātus take either pada in the
-        // RV. So we make 1.3.12 optional under leṬ to allow paras forms
-        // like `aśnavat` (corpus 6×, RV) for √aś (anudāttet, atm-only by
-        // classical 1.3.12).
-        let is_let = pp.p.terms().iter().any(|t| t.has_lakara(Let));
-        if is_let {
-            pp.optional_atma("1.3.12");
-        } else {
-            pp.atma("1.3.12");
-        }
+        //
+        // 1.3.12 has no `vā` in Pāṇini — anudāttet/ṅit dhātus take
+        // ātmanepada only, even under leṬ. Vedic register sometimes shows
+        // paras forms of these roots (e.g. RV `aśnavat` for √aś), but
+        // those are Vedic-only and not licensed by the grammar. Per the
+        // "Pāṇinian sanction is the only criterion" principle we do NOT
+        // relax this for leṬ.
+        pp.atma("1.3.12");
     } else if dhatu.has_tag_in(&[T::Yit, T::svaritet]) {
         // karoti, kurute
         pp.optional_atma("1.3.72");
