@@ -1,0 +1,680 @@
+code	dhatu	artha
+01.2000	DrA	gatO
+01.2001	sTA^	grahaRe
+01.2002	smi\	dIptO
+01.2003	anUnnI	grahaRe
+01.2004	jrI	vfdDO
+01.2005	Ju\	
+01.2006	Jyu\	
+01.2007	su^	gatO
+01.2008	su	preraRe
+01.2009	Su	gatO
+01.2010	jU^	
+01.2011	hvF^	
+01.2012	saMSyE^	
+01.2013	sE	vayohAnO
+01.2014	snE	saMvaraRe
+01.2015	stE	
+01.2016	jyo\	
+01.2017	kaNka~\	gatO
+01.2018	makka~\	gatO
+01.2019	maNka~\	gatO
+01.2020	SaNka~^	Baye
+01.2021	SlaNka~\	gatO
+01.2022	SraNka~\	gatO
+01.2023	staka~	hiMsAyAm
+01.2024	svaNka~\	gatO
+01.2025	SvaNka~\	gatO
+01.2026	taNka~	ardane
+01.2027	traNka~	
+01.2028	vakka~\	gatO
+01.2029	vaNka~\	gatO
+01.2030	vazka~\	gatO
+01.2031	wOka~\	
+01.2032	zazka~	gatO
+01.2033	zukka~\	gatO
+01.2034	iNKa~	gatO
+01.2035	INKa~	gatO
+01.2036	liNKa~	gatO
+01.2037	maNKa~	gatO
+01.2038	naNKa~	gatO
+01.2039	raNKa~	gatO
+01.2040	riNKa~	gatO
+01.2041	SiNKa~	gatO
+01.2042	traNKa~	
+01.2043	triNKa~	
+01.2044	vaNKa~	gatO
+01.2045	buNga~	varjane
+01.2046	iNga~^	gatO
+01.2047	juNga~	
+01.2048	laNga~	gatO
+01.2049	liNga~	gatO
+01.2050	maNga~\	gatO
+01.2051	riNga~	gatO
+01.2052	saga~	saMvaraRe
+01.2053	SlaNga~	gatO
+01.2054	SraNga~	gatO
+01.2055	sTaga~	saMvaraRe
+01.2056	svaNga~	gatO
+01.2057	SvaNga~	gatO
+01.2058	taNga~	gatO
+01.2059	traNga~	
+01.2060	tvaNga~	kampane
+01.2061	vaNga~	gatO
+01.2062	vuNga~	varjane
+01.2063	yuNga~	varjane
+01.2064	aNGa~\	gatO
+01.2065	arGa~	
+01.2066	carGa~	gatO
+01.2067	daNGa~	
+01.2068	laNGa~^	gatO
+01.2069	maNGa~^	
+01.2070	raNGa~\	
+01.2071	SiNGa~	
+01.2072	vaNGa~\	gatO
+01.2073	jarca~	BAzAyAm
+01.2074	Jarca~	
+01.2075	juYca~	BAzAyAm
+01.2076	kaYca~\	banDane
+01.2077	kAYca~\	dIptO
+01.2078	maYca~\	
+01.2079	muYca~^	gatO
+01.2080	paYca~^	karaRe
+01.2081	saca~^	karaRe
+01.2082	SaYca~\	gatO
+01.2083	snuca~\	
+01.2084	stuca~\	
+01.2085	SvaYca~\	
+01.2086	hUrCa~	gatO
+01.2087	jarCa~	
+01.2088	JarCa~	
+01.2089	lAYCa~	
+01.2090	muCa~	
+01.2091	mUrCa~	vfdDO
+01.2092	poYCa~\	
+01.2093	puCa~	
+01.2094	sPUrCa~	vyAptO
+01.2095	uYCa~	uYCe
+01.2096	vAYCa~	
+01.2097	DfYja~	gatO
+01.2098	DrAja~^	gatO
+01.2099	DraYja~^	gatO
+01.2100	Drija~	gatO
+01.2101	DvaYja~	gatO
+01.2102	fYja~\	
+01.2103	gaYja~	Sabde
+01.2104	gfYja~	Sabde
+01.2105	guYja~	
+01.2106	IYja~	gatO
+01.2107	jaYja~	
+01.2108	kaja~	
+01.2109	KaYja~	
+01.2110	kuYja~	
+01.2111	kzaYja~\	gatO
+01.2112	laYja~	
+01.2113	lAYja~	
+01.2114	marja~	Sabde
+01.2115	muYja~	Sabde
+01.2116	oja~	
+01.2117	raji~^	darSane
+01.2118	reja~^	gatO
+01.2119	rija~\	SozaRe
+01.2120	saji~^	darSane
+01.2121	sajja~	gatO
+01.2122	sarja~	
+01.2123	sarja~	
+01.2124	saYja~	gatO
+01.2125	saYja~^	
+01.2126	SiYja~\	BAzAyAm
+01.2127	svaji~\	
+01.2128	Svaji~\	gatO
+01.2129	svaYja~\	
+01.2130	SvaYja~\	gatO
+01.2131	vIja~^	
+01.2132	jarJa~	
+01.2133	buwa~	hiMsAyAm
+01.2134	cuRwa~	Cedane
+01.2135	GaRwa~	BAzAyAm
+01.2136	hewa~^	
+01.2137	kaRwa~	gatO
+01.2138	lowa~	unmAde
+01.2139	muRwa~	
+01.2140	rOwa~	anAdare
+01.2141	ruRwa~	steye
+01.2142	sawa~	
+01.2143	siwa~	anAdare
+01.2144	sPuRwa~	
+01.2145	vaRwa~\	viBAge
+01.2146	vawwa~	
+01.2147	aRWa~\	gatO
+01.2148	baWa~	
+01.2149	kaRWa~^	
+01.2150	kuRWa~	
+01.2151	maRWa~\	
+01.2152	muRWa~\	rakzaRe
+01.2153	ruRWa~	gatO
+01.2154	SuRWa~	
+01.2155	vaRWa~\	gatO
+01.2156	BaRqa~\	
+01.2157	BuRqa~\	
+01.2158	caRqa~	
+01.2159	cuRqa~	Cedane
+01.2160	druqa~	kzaye
+01.2161	drUqa~	gatO
+01.2162	gaRqa~	
+01.2163	hiRqa~\	gatO
+01.2164	hrOqa~	gatO
+01.2165	hruqa~^	gatO
+01.2166	hrUqa~^	gatO
+01.2167	huRqa~\	
+01.2168	kaRqa~^	viBAge
+01.2169	KaRqa~\	Cedane
+01.2170	Koqa~	
+01.2171	kuRqa~^	dAhe
+01.2172	KuRqa~\	Bedane
+01.2173	kzviqa~	BAzAyAm
+01.2174	kzviqa~\	ArdrIBAve
+01.2175	mAqa~^	mAne
+01.2176	maRqa~^	
+01.2177	muRqa~^	Cedane
+01.2178	olaRqa~	kzepe
+01.2179	paRqa~\	gatO
+01.2180	piRqa~\	saNGAte
+01.2181	puRqa~	
+01.2182	reqa~\	
+01.2183	SaRqa~\	hiMsAyAm
+01.2184	sPuRqa~\	
+01.2185	SuRqa~	Bedane
+01.2186	taRqa~\	
+01.2187	toqa~	anAdare
+01.2188	tuqqa~	anAdare
+01.2189	tuRqa~\	hiMsAyAm
+01.2190	vaRqa~\	viBAge
+01.2191	vaqQa~	
+01.2192	DvraRa~	Sabde
+01.2193	GfRRa~\	
+01.2194	GiRRa~\	grahaRe
+01.2195	GuRRa~\	
+01.2196	JaRa~	Sabde
+01.2197	lERa~	gatO
+01.2198	peRa~	gatO
+01.2199	anta~	banDane
+01.2200	cinta~	cintAyAm
+01.2201	Inta~	banDane
+01.2202	lunTa~	hiMsAyAm
+01.2203	mAnTa~	hiMsAyAm
+01.2204	panTa~	gatO
+01.2205	pruTa~^	
+01.2206	punTa~	dAne
+01.2207	SnaTa~	hiMsAyAm
+01.2208	anda~	banDane
+01.2209	banda~	
+01.2210	Banda~\	dIptO
+01.2211	binda~	Cedane
+01.2212	buda~^	jYAne
+01.2213	canda~	dIptO
+01.2214	Canda~\	
+01.2215	gUrda~	
+01.2216	inda~	
+01.2217	kanda~^	BAzAyAm
+01.2218	klanda~^	
+01.2219	klinda~^	
+01.2220	kUrda~^	
+01.2221	kzada~\	Cedane
+01.2222	manda~^	made
+01.2223	minda~\	vfdDO
+01.2224	nanda~	prIRane
+01.2225	sada~^	
+01.2226	skunda~\	
+01.2227	spanda~\	kampane
+01.2228	sUda~\	
+01.2229	svada~^	AsvAdane
+01.2230	svida~^	
+01.2231	Svinda~	
+01.2232	syadi~\	gatO
+01.2233	tanda~\	
+01.2234	tranda~	
+01.2235	tunda~	
+01.2236	Urda~\	mAne
+01.2237	vanda~\	stutO
+01.2238	duDa~	hiMsAyAm
+01.2239	prEDa~\	
+01.2240	siDa~	gatO
+01.2241	siDa~	
+01.2242	spfDa~^	
+01.2243	sriDa~	
+01.2244	veDa~\	kampane
+01.2245	sana~	AsvAdane
+01.2246	culumpa~	
+01.2247	dipa~\	
+01.2248	hrepa~\	gatO
+01.2249	kampa~^	viloqane
+01.2250	kxpa~^	
+01.2251	kzampa~	DAraRe
+01.2252	kzumpa~	gatO
+01.2253	saMvapa~^	secane
+01.2254	sapa~^	pUjAyAm
+01.2255	stepa~\	kzaraRe
+01.2256	stipa~\	kzaraRe
+01.2257	tumpa~	hiMsAyAm
+01.2258	ramPa~	gatO
+01.2259	rarPa~	gatO
+01.2260	tumPa~	hiMsAyAm
+01.2261	varPa~	gatO
+01.2262	amba~^	gatO
+01.2263	bamba~	gatO
+01.2264	camba~	gatO
+01.2265	cIba~	darSane
+01.2266	cumba~\	
+01.2267	gamba~	gatO
+01.2268	Gamba~\	gatO
+01.2269	kamba~	gatO
+01.2270	Kamba~	gatO
+01.2271	lamba~\	
+01.2272	lamba~\	Sabde
+01.2273	lumba~	
+01.2274	mamba~	gatO
+01.2275	namba~	gatO
+01.2276	pamba~	gatO
+01.2277	plaba~\	gatO
+01.2278	ramba~\	
+01.2279	ramba~^	Sabde
+01.2280	Samba~	gatO
+01.2281	sarba~	gatO
+01.2282	tamba~	gatO
+01.2283	tarba~	gatO
+01.2284	tumba~	ardane
+01.2285	BarBa~	hiMsAyAm
+01.2286	bIBa~\	
+01.2287	daBi~^	hiMsAyAm
+01.2288	damBa~^	hiMsAyAm
+01.2289	jamBa~^	
+01.2290	jamBa~\	jYAne
+01.2291	jfmBa~^	
+01.2292	lamBa~\	Sabde
+01.2293	ramBa~\	Sabde
+01.2294	riBa~^	
+01.2295	sfBi~	hiMsAyAm
+01.2296	sfmBa~	hiMsAyAm
+01.2297	skamBa~\	
+01.2298	SramBa~\	
+01.2299	sriBi~	hiMsAyAm
+01.2300	srimBa~	hiMsAyAm
+01.2301	staBi~\	DAraRe
+01.2302	stamBa~\	DAraRe
+01.2303	stuBa~^	BAzAyAm
+01.2304	SumBa~\	dIptO
+01.2305	SumBa~	hiMsAyAm
+01.2306	brahma~	gatO
+01.2307	Dama~^	
+01.2308	drumma~	gatO
+01.2309	qama~	Sabde
+01.2310	stama~	
+01.2311	dAya~\	dAne
+01.2312	laya~\	gatO
+01.2313	pAya~\	
+01.2314	pIya~	
+01.2315	saya~\	gatO
+01.2316	vewya~	
+01.2317	sTira~	
+01.2318	SvAtra~	gatO
+01.2319	tandra~	karaRe
+01.2320	yantra~	banDane
+01.2321	Kalla~\	viloqane
+01.2322	lula~^	gatO
+01.2323	palla~	gatO
+01.2324	sala~	gatO
+01.2325	SAla~\	dIptO
+01.2326	sTala~	
+01.2327	vehla~	
+01.2328	danva~	gatO
+01.2329	Danva~^	kzaraRe
+01.2330	dinva~	
+01.2331	DUrva~	hiMsAyAm
+01.2332	jinva~^	gatO
+01.2333	jUrva~	BakzaRe
+01.2334	klava~\	Baye
+01.2335	Parva~	gatO
+01.2336	pava~\	gatO
+01.2337	pinva~^	sTOlye
+01.2338	plava~\	gatO
+01.2339	raRva~	gatO
+01.2340	riRva~	gatO
+01.2341	rIva~^	grahaRe
+01.2342	seva~\	stamBe
+01.2343	Tarva~	gatO
+01.2344	Urva~	hiMsAyAm
+01.2345	zWIva~^	
+01.2346	beSa~	gatO
+01.2347	BfMSa~	BAzAyAm
+01.2348	biSa~	gatO
+01.2349	BraSi~^	patane
+01.2350	kraMSa~	
+01.2351	kuMSa~	BAzAyAm
+01.2352	naMSa~^	vyAptO
+01.2353	paMSa~	Bedane
+01.2354	ruMSa~	BAzAyAm
+01.2355	tuSa~\	kzaraRe
+01.2356	tuSa~	tfptO
+01.2357	anviza~	
+01.2358	Bfkza~^	BakzaRe
+01.2359	DIkza~\	
+01.2360	drANkza~	BAzAyAm
+01.2361	DvANkza~	BAzAyAm
+01.2362	GaMza~\	
+01.2363	jaNkza~	
+01.2364	JUza~	
+01.2365	kANkza~^	prayatne
+01.2366	luza~	steye
+01.2367	mANkza~	
+01.2368	myakza~	
+01.2369	sakza~	gatO
+01.2370	sAkza~	
+01.2371	sparza~\	darSane
+01.2372	stfkza~	gatO
+01.2373	sUza~	
+01.2374	vANkza~	
+01.2375	BrAsa~^	dIptO
+01.2376	daMsa~	
+01.2377	daMsa~	Bedane
+01.2378	hiMsa~^	hiMsAyAm
+01.2379	jaMsa~	rakzaRe
+01.2380	jartsa~	rakzaRe
+01.2381	kAMsa~\	dIptO
+01.2382	knaMsa~	
+01.2383	kuMsa~	BAzAyAm
+01.2384	paMsa~	Bedane
+01.2385	piMsa~	BAzAyAm
+01.2386	saMyasa~	karaRe
+01.2387	srasi~\	patane
+01.2388	taMsa~^	gatO
+01.2389	traMsa~	BAzAyAm
+01.2390	vrUsa~	hiMsAyAm
+01.2391	aMha~\	gatO
+01.2392	baMha~\	vfdDO
+01.2393	beha~^	karaRe
+01.2394	bfMha~	vfdDO
+01.2395	bfMha~^	Sabde
+01.2396	dfMha~^	karaRe
+01.2397	luha~	
+01.2398	maMha~\	dAne
+01.2399	raMha~^	
+01.2400	saha~\	
+01.2401	saMvaha~^	grahaRe
+01.2402	sniha~	
+01.2403	sraMha~\	
+01.2404	heLa~^	karaRe
+01.2405	reLa~\	
+02.2000	DrA	gatO
+02.2001	snA	karaRe
+02.2002	anvatI	
+02.2003	atI	
+02.2004	snu	
+02.2005	stu^	stutO
+02.2006	su	preraRe
+02.2007	sU\	DAraRe
+02.2008	anUde	gatO
+02.2009	anvave	
+02.2010	anve	gatO
+02.2011	pre^	gatO
+02.2012	pfYj\	
+02.2013	piYj\	
+02.2014	SiYj\	BAzAyAm
+02.2015	svap	patane
+02.2016	jAtavedas	
+02.2017	kaMs\	gatO
+02.2018	sas	
+03.2000	anvf^	
+04.2000	snA^	karaRe
+04.2001	aDyavaso	
+04.2002	so	hiMsAyAm
+04.2003	naNKa~	gatO
+04.2004	mfca~	hiMsAyAm
+04.2005	fYja~^	karaRe
+04.2006	raji~^	darSane
+04.2007	kzviqa~	ArdrIBAve
+04.2008	mrita~	vayohAnO
+04.2009	minda~	vfdDO
+04.2010	gaDa~	
+04.2011	ranDa~	
+04.2012	siDa~	
+04.2013	qimpa~^	kzepe
+04.2014	stUpa~	
+04.2015	qimBa~^	kzepe
+04.2016	Sima~	Cedane
+04.2017	stIma~	
+04.2018	Ara~	stutO
+04.2019	jura~	vayohAnO
+04.2020	siva~	saNGAte
+04.2021	srIva~	
+04.2022	zWIva~	
+04.2023	BraSi~^	patane
+04.2024	BrAsa~\	dIptO
+04.2025	misa~	gatO
+04.2026	plusa~	dAhe
+04.2027	snusa~	BakzaRe
+04.2028	dfMha~^	karaRe
+04.2029	saha~	prIRane
+04.2030	sniha~	
+04.2031	snuha~	
+05.2000	si^	banDane
+05.2001	su^	karaRe
+05.2002	caG	hiMsAyAm
+05.2003	saG	grahaRe
+05.2004	stiG^	
+05.2005	tiG	hiMsAyAm
+05.2006	daB\	hiMsAyAm
+05.2007	damB\	hiMsAyAm
+05.2008	skamB	
+05.2009	skumB	grahaRe
+05.2010	staB^	DAraRe
+05.2011	stamB^	DAraRe
+05.2012	stumB	stamBe
+05.2013	Dinv	pAlane
+05.2014	anvaS^	gatO
+06.2000	tOdAdika	
+06.2001	sU^	
+06.2002	uNKa~	gatO
+06.2003	sici~^	secane
+06.2004	vraSca~	Cedane
+06.2005	mfCa~\	kzaye
+06.2006	uYCa~	uYCe
+06.2007	Brajja~^	SozaRe
+06.2008	fYja~^	karaRe
+06.2009	lajja~\	
+06.2010	majja~	gatO
+06.2011	marja~	Sabde
+06.2012	naja~\	
+06.2013	cuRwa~	Cedane
+06.2014	Bruqa~	saMvaraRe
+06.2015	buqa~	saMvaraRe
+06.2016	cuRqa~	Cedane
+06.2017	druqa~	kzaye
+06.2018	Guqa~	rakzaRe
+06.2019	kUqa~	BakzaRe
+06.2020	nuqa~	hiMsAyAm
+06.2021	cuRa~	Cedane
+06.2022	fDada~	
+06.2023	Kuda~	
+06.2024	sada~	
+06.2025	udi~^	kzaraRe
+06.2026	anvfDa~	DAraRe
+06.2027	kzupa~	
+06.2028	qimpa~^	kzepe
+06.2029	tfmpa~	darSane
+06.2030	tumpa~	hiMsAyAm
+06.2031	fmPa~	hiMsAyAm
+06.2032	gumPa~	banDane
+06.2033	rimPa~	hiMsAyAm
+06.2034	tfmPa~	
+06.2035	tumPa~	hiMsAyAm
+06.2036	kumba~	saMvaraRe
+06.2037	qimBa~^	kzepe
+06.2038	SumBa~^	dIptO
+06.2039	ira~	gatO
+06.2040	jura~^	vayohAnO
+06.2041	sila~	uYCe
+06.2042	inva~	
+06.2043	jAtavedasa~	
+06.2044	stFha~	hiMsAyAm
+07.2000	fYj\	karaRe
+07.2001	ud	kzaraRe
+07.2002	hiMs^	hiMsAyAm
+08.2000	olaRq	kzepe
+08.2001	GaR^	
+08.2002	san^	AsvAdane
+08.2003	inv	
+09.2000	jinana	
+09.2001	si^	banDane
+09.2002	jrI	vfdDO
+09.2003	lpI	saNGAte
+09.2004	lvI	gatO
+09.2005	lyI	saNGAte
+09.2006	hru	darSane
+09.2007	knu^	Sabde
+09.2008	jU	
+09.2009	hF\	
+09.2010	sF	hiMsAyAm
+09.2011	spF	hiMsAyAm
+09.2012	hew	
+09.2013	heQ	
+09.2014	skamB	
+09.2015	skumB	grahaRe
+09.2016	staB	DAraRe
+09.2017	stamB	DAraRe
+09.2018	stumB	stamBe
+09.2019	inv^	
+10.2000	sAmaya	darSane
+10.2001	jrI	vfdDO
+10.2002	cikka~	
+10.2003	kizka~\	hiMsAyAm
+10.2004	waNka~	saMvaraRe
+10.2005	aNKa~	viloqane
+10.2006	liNga~	gatO
+10.2007	laNGa~	gatO
+10.2008	raNGa~	
+10.2009	juYca~	BAzAyAm
+10.2010	mfca~	hiMsAyAm
+10.2011	kzaYja~	gatO
+10.2012	laYja~	
+10.2013	maYja~	
+10.2014	miYja~	BAzAyAm
+10.2015	muYja~	Sabde
+10.2016	oja~	
+10.2017	piYja~	
+10.2018	SiYja~\	BAzAyAm
+10.2019	vIja~^	
+10.2020	BaRwa~	
+10.2021	buwa~	hiMsAyAm
+10.2022	cuRwa~	Cedane
+10.2023	GaRwa~	BAzAyAm
+10.2024	kawwa~	saMvaraRe
+10.2025	maRwa~	karaRe
+10.2026	puRwa~	BAzAyAm
+10.2027	sawa~	
+10.2028	sAwa~	karaRe
+10.2029	sawwa~	hiMsAyAm
+10.2030	sniwa~	gatO
+10.2031	sPuRwa~	
+10.2032	sPuwwa~	anAdare
+10.2033	vaRwa~	viBAge
+10.2034	vuRwa~	hiMsAyAm
+10.2035	cuRWa~	hiMsAyAm
+10.2036	guRWa~	saMvaraRe
+10.2037	kaRWa~	
+10.2038	kuRWa~	
+10.2039	saWa~	
+10.2040	SuRWa~	
+10.2041	SvaRWa~	
+10.2042	BaRqa~	
+10.2043	caRqa~\	
+10.2044	cuRqa~	Cedane
+10.2045	guRqa~	saMvaraRe
+10.2046	kaRqa~	viBAge
+10.2047	KaRqa~	Cedane
+10.2048	Koqa~	
+10.2049	kUqa~	dAhe
+10.2050	kuRqa~^	dAhe
+10.2051	KuRqa~	Bedane
+10.2052	lAqa~	kzepe
+10.2053	laRqa~	kzepe
+10.2054	naqa~	patane
+10.2055	olaRqa~	kzepe
+10.2056	paRqa~	gatO
+10.2057	piRqa~	saNGAte
+10.2058	sPaRqa~	hasane
+10.2059	sPuRqa~	
+10.2060	vaRqa~	viBAge
+10.2061	cURa~	
+10.2062	pURa~	
+10.2063	cinta~	cintAyAm
+10.2064	kIrta~^	karaRe
+10.2065	vasta~\	hiMsAyAm
+10.2066	panTa~	gatO
+10.2067	Canda~	
+10.2068	gUrda~	
+10.2069	larda~	
+10.2070	minda~	vfdDO
+10.2071	sUda~^	
+10.2072	bunDa~	banDane
+10.2073	gUrDa~	stutO
+10.2074	skanDa~	
+10.2075	campa~	
+10.2076	Campa~	gatO
+10.2077	dimpa~\	
+10.2078	kUpa~	
+10.2079	kzampa~	DAraRe
+10.2080	qampa~\	
+10.2081	qimpa~^	kzepe
+10.2082	stepa~	kzaraRe
+10.2083	stUpa~	
+10.2084	wipa~	darSane
+10.2085	cIba~	darSane
+10.2086	cumba~	hiMsAyAm
+10.2087	kumba~	saMvaraRe
+10.2088	lumba~	
+10.2089	qamba~	kzepe
+10.2090	Samba~	gatO
+10.2091	tumba~	ardane
+10.2092	dimBa~^	
+10.2093	qamBa~\	
+10.2094	qimBa~^	kzepe
+10.2095	stama~	
+10.2096	Gara~	darSane
+10.2097	kartra~	
+10.2098	kundra~	
+10.2099	mantra~^	BAzAyAm
+10.2100	yantra~	banDane
+10.2101	Cala~	
+10.2102	Gola~	viloqane
+10.2103	jula~	
+10.2104	SAla~\	dIptO
+10.2105	Sulva~	
+10.2106	aMSa~^	viBAge
+10.2107	BfMSa~	BAzAyAm
+10.2108	kuMSa~	BAzAyAm
+10.2109	laSa~	
+10.2110	paMSa~	Bedane
+10.2111	ruMSa~	BAzAyAm
+10.2112	mlakza~	Cedane
+10.2113	vekza~	darSane
+10.2114	daMsa~^	
+10.2115	daMsa~\	Bedane
+10.2116	hiMsa~	hiMsAyAm
+10.2117	jaMsa~	rakzaRe
+10.2118	knaMsa~	
+10.2119	kuMsa~	BAzAyAm
+10.2120	paMsa~	Bedane
+10.2121	piMsa~	BAzAyAm
+10.2122	pusa~	
+10.2123	taMsa~	gatO
+10.2124	traMsa~	BAzAyAm
+10.2125	vrUsa~	hiMsAyAm
+10.2126	aMha~	gatO
+10.2127	bfMha~	Sabde
+10.2128	daMha~	dIptO
+10.2129	gaha~	
+10.2130	maMha~^	dAne
+10.2131	raMha~	
+10.2132	saha~^	
+10.2133	sniha~	

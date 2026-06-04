@@ -65,3 +65,5 @@ mod kaumudi_67;
 mod dhaturatnakara;
 
 mod macdonell;
+
+mod extra_dhatu_specs;
