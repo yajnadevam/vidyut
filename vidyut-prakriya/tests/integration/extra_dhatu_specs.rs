@@ -232,7 +232,7 @@ fn extra_dhatu_specs_attested_forms() {
                             Ok(t) => t,
                             Err(_) => continue,
                         };
-                        outputs.extend(v.derive_tinantas(&tin).iter().map(|p| p.text().to_string()));
+                        outputs.extend(v.derive_tinantas(&tin).iter().map(|p| p.text().into()));
                     }
                 }
             }
@@ -314,12 +314,12 @@ fn extra_dhatu_specs_attested_forms() {
         }
 
         for t in &row_unmatched {
-            // Record vidyut outputs sharing the token's final 3 chars so the
-            // stem vidyut actually used is visible next to the attested form.
-            let tail: String = t.chars().rev().take(3).collect::<String>().chars().rev().collect();
+            // Record vidyut outputs sharing the token's final 3 bytes (SLP1 is
+            // ASCII here) so the stem vidyut actually used is visible.
+            let tail = &t[t.len().saturating_sub(3)..];
             let near: Vec<&str> = outputs
                 .iter()
-                .filter(|o| o.ends_with(&tail))
+                .filter(|o| o.ends_with(tail))
                 .map(|s| s.as_str())
                 .collect();
             all_unmatched.push(format!("{root}\t{upadesha}\t{t}\t{}", near.join(",")));
