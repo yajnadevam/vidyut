@@ -1,7 +1,7 @@
 code	dhatu	artha
 01.2000	DA^	
 01.2001	DrA	gatO
-01.2002	hA^	varjane
+01.2002	hA	varjane
 01.2003	sTA^	grahaRe
 01.2004	ci	
 01.2005	pi\	vfdDO
@@ -143,7 +143,7 @@ code	dhatu	artha
 01.2141	muYja~	Sabde
 01.2142	oja~	
 01.2143	pUja~	pUjAyAm
-01.2144	raji~^	darSane
+01.2144	raji~	darSane
 01.2145	reja~^	gatO
 01.2146	rija~\	SozaRe
 01.2147	saji~^	darSane
@@ -175,7 +175,7 @@ code	dhatu	artha
 01.2173	sawa~	
 01.2174	siwa~	anAdare
 01.2175	sPuRwa~	
-01.2176	vaRwa~\	viBAge
+01.2176	vaRwa~	viBAge
 01.2177	vawwa~	
 01.2178	aRWa~\	gatO
 01.2179	baWa~	
@@ -273,7 +273,7 @@ code	dhatu	artha
 01.2271	minda~\	vfdDO
 01.2272	nanda~	prIRane
 01.2273	pada~	
-01.2274	sada~^	
+01.2274	sada~	
 01.2275	skunda~\	
 01.2276	spanda~\	kampane
 01.2277	sUda~\	
@@ -299,7 +299,7 @@ code	dhatu	artha
 01.2297	SuDi~^	
 01.2298	veDa~\	kampane
 01.2299	yuDa~	
-01.2300	hana~\	hiMsAyAm
+01.2300	hana~	hiMsAyAm
 01.2301	jana~\	
 01.2302	sana~	AsvAdane
 01.2303	stana~	Sabde
@@ -350,10 +350,10 @@ code	dhatu	artha
 01.2348	tumba~	ardane
 01.2349	BarBa~	hiMsAyAm
 01.2350	bIBa~\	
-01.2351	daBi~^	hiMsAyAm
-01.2352	damBa~^	hiMsAyAm
+01.2351	daBi~	hiMsAyAm
+01.2352	damBa~	hiMsAyAm
 01.2353	dfBa~	Baye
-01.2354	jamBa~^	
+01.2354	jamBa~	
 01.2355	jamBa~\	jYAne
 01.2356	jfmBa~^	
 01.2357	lamBa~\	Sabde
@@ -415,7 +415,7 @@ code	dhatu	artha
 01.2413	seva~\	stamBe
 01.2414	Tarva~	gatO
 01.2415	Urva~	hiMsAyAm
-01.2416	zWIva~^	
+01.2416	zWIva~	
 01.2417	beSa~	gatO
 01.2418	BfMSa~	BAzAyAm
 01.2419	biSa~	gatO
@@ -430,7 +430,7 @@ code	dhatu	artha
 01.2428	ruMSa~	BAzAyAm
 01.2429	tuSa~\	kzaraRe
 01.2430	tuSa~	tfptO
-01.2431	vaSa~^	
+01.2431	vaSa~	
 01.2432	anviza~	
 01.2433	Bfkza~^	BakzaRe
 01.2434	Dfza~	
@@ -458,13 +458,13 @@ code	dhatu	artha
 01.2456	sUza~	
 01.2457	vANkza~	
 01.2458	yakza~^	pUjAyAm
-01.2459	Bartsa~^	
+01.2459	Bartsa~	
 01.2460	BrAsa~^	dIptO
 01.2461	cakAsa~\	dIptO
 01.2462	daMsa~	
 01.2463	daMsa~	Bedane
 01.2464	dasa~	
-01.2465	hiMsa~^	hiMsAyAm
+01.2465	hiMsa~	hiMsAyAm
 01.2466	jaMsa~	rakzaRe
 01.2467	jartsa~	rakzaRe
 01.2468	jasa~^	
@@ -512,7 +512,7 @@ code	dhatu	artha
 02.2013	u\	
 02.2014	DU\	
 02.2015	kU	gatO
-02.2016	nU^	Sabde
+02.2016	nU	Sabde
 02.2017	sU\	DAraRe
 02.2018	Bf^	
 02.2019	kf^	karaRe
@@ -524,28 +524,28 @@ code	dhatu	artha
 02.2025	drE	
 02.2026	DrE	
 02.2027	DyE^	cintAyAm
-02.2028	gE^	BAzAyAm
+02.2028	gE	BAzAyAm
 02.2029	glE^	karaRe
 02.2030	SrE	
 02.2031	do^	
-02.2032	tak	
-02.2033	pfYj\	
-02.2034	piYj\	
-02.2035	SiYj\	BAzAyAm
-02.2036	cit\	grahaRe
-02.2037	fD\	
-02.2038	jan\	
-02.2039	svap	patane
-02.2040	gam	gatO
-02.2041	kzam	
-02.2042	kzar	kzaraRe
-02.2043	dAS	pUjAyAm
-02.2044	takz	
-02.2045	jAtavedas	
-02.2046	kaMs\	gatO
-02.2047	rAs^	dAne
-02.2048	sas	
-02.2049	rih^	snehane
+02.2032	taka~	
+02.2033	pfYja~\	
+02.2034	piYja~\	
+02.2035	SiYja~\	BAzAyAm
+02.2036	cita~\	grahaRe
+02.2037	fDa~	
+02.2038	jana~\	
+02.2039	svapa~	patane
+02.2040	gama~	gatO
+02.2041	kzama~	
+02.2042	kzara~	kzaraRe
+02.2043	dASa~	pUjAyAm
+02.2044	takza~	
+02.2045	jAtavedasa~	
+02.2046	kaMsa~\	gatO
+02.2047	rAsa~^	dAne
+02.2048	sasa~	
+02.2049	riha~^	snehane
 03.2000	GrA^	jYAne
 03.2001	jYA^	jYAne
 03.2002	pA\	darSane
@@ -561,15 +561,15 @@ code	dhatu	artha
 03.2012	tF	
 03.2013	gE	BAzAyAm
 03.2014	So^	
-03.2015	pfc^	saNGAte
-03.2016	vac^	BAzAyAm
-03.2017	vyac^	vezwane
-03.2018	cit^	grahaRe
-03.2019	mad^	prIRane
-03.2020	gam	gatO
-03.2021	diS	
-03.2022	vaS^	
-03.2023	juz	
+03.2015	pfca~^	saNGAte
+03.2016	vaca~^	BAzAyAm
+03.2017	vyaca~	vezwane
+03.2018	cita~^	grahaRe
+03.2019	mada~^	prIRane
+03.2020	gama~	gatO
+03.2021	diSa~	
+03.2022	vaSa~	
+03.2023	juza~	
 04.2000	dA	banDane
 04.2001	DA^	
 04.2002	jyA\	
@@ -606,14 +606,14 @@ code	dhatu	artha
 04.2033	SunDa~^	
 04.2034	rana~	grahaRe
 04.2035	tana~	Sabde
-04.2036	qimpa~^	kzepe
+04.2036	qimpa~	kzepe
 04.2037	stUpa~	
-04.2038	qimBa~^	kzepe
+04.2038	qimBa~	kzepe
 04.2039	krama~^	gatO
 04.2040	Sima~	Cedane
 04.2041	stIma~	
 04.2042	Ara~	stutO
-04.2043	gura~\	karaRe
+04.2043	gura~	karaRe
 04.2044	jura~	vayohAnO
 04.2045	tura~\	
 04.2046	SUla~^	Sabde
@@ -639,7 +639,7 @@ code	dhatu	artha
 04.2066	sniha~	
 04.2067	snuha~	
 05.2000	Di	pAlane
-05.2001	si^	banDane
+05.2001	si	banDane
 05.2002	dru	hiMsAyAm
 05.2003	sku^	
 05.2004	Sru^	dAne
@@ -652,28 +652,28 @@ code	dhatu	artha
 05.2011	kF	hiMsAyAm
 05.2012	stF^	
 05.2013	tF	
-05.2014	caG	hiMsAyAm
-05.2015	saG	grahaRe
-05.2016	stiG^	
-05.2017	tiG	hiMsAyAm
-05.2018	daB\	hiMsAyAm
-05.2019	damB\	hiMsAyAm
-05.2020	kzuB	viloqane
-05.2021	skaB	
-05.2022	skamB	
-05.2023	skumB	grahaRe
-05.2024	staB^	DAraRe
-05.2025	stamB^	DAraRe
-05.2026	stumB	stamBe
-05.2027	Dinv	pAlane
-05.2028	anvaS^	gatO
-05.2029	akz	vyAptO
-05.2030	pruz^	secane
-05.2031	takz\	
-05.2032	dAs	hiMsAyAm
+05.2014	caGa~	hiMsAyAm
+05.2015	saGa~	grahaRe
+05.2016	stiGa~^	
+05.2017	tiGa~	hiMsAyAm
+05.2018	daBa~\	hiMsAyAm
+05.2019	damBa~\	hiMsAyAm
+05.2020	kzuBa~	viloqane
+05.2021	skaBa~	
+05.2022	skamBa~	
+05.2023	skumBa~	grahaRe
+05.2024	staBa~	DAraRe
+05.2025	stamBa~	DAraRe
+05.2026	stumBa~	stamBe
+05.2027	Dinva~	pAlane
+05.2028	anvaSa~^	gatO
+05.2029	akza~^	vyAptO
+05.2030	pruza~^	secane
+05.2031	takza~\	
+05.2032	dAsa~	hiMsAyAm
 06.2000	tOdAdika	
 06.2001	nu^	Sabde
-06.2002	yu^	
+06.2002	yu	
 06.2003	sU^	
 06.2004	pF	
 06.2005	tF^	
@@ -711,12 +711,12 @@ code	dhatu	artha
 06.2037	udi~^	kzaraRe
 06.2038	unda~^	kzaraRe
 06.2039	anvfDa~	DAraRe
-06.2040	fDa~\	
+06.2040	fDa~	
 06.2041	mfDa~^	varjane
 06.2042	cupa~	
 06.2043	kfpa~\	
 06.2044	kzupa~	
-06.2045	qimpa~^	kzepe
+06.2045	qimpa~	kzepe
 06.2046	tfmpa~	darSane
 06.2047	tumpa~	hiMsAyAm
 06.2048	fmPa~	hiMsAyAm
@@ -725,7 +725,7 @@ code	dhatu	artha
 06.2051	tfmPa~	
 06.2052	tumPa~	hiMsAyAm
 06.2053	kumba~	saMvaraRe
-06.2054	qimBa~^	kzepe
+06.2054	qimBa~	kzepe
 06.2055	SumBa~^	dIptO
 06.2056	ira~	gatO
 06.2057	jura~^	vayohAnO
@@ -742,18 +742,18 @@ code	dhatu	artha
 06.2068	vasa~	dIptO
 06.2069	duha~^	
 06.2070	stFha~	hiMsAyAm
-07.2000	tvaYc	gatO
-07.2001	fYj\	karaRe
-07.2002	ard	gatO
-07.2003	ud	kzaraRe
-07.2004	fD	
-07.2005	hiMs^	hiMsAyAm
+07.2000	tvaYci~r	gatO
+07.2001	fYji~\r	karaRe
+07.2002	ardi~r	gatO
+07.2003	udi~r	kzaraRe
+07.2004	fDi~r	
+07.2005	hiMsi~^r	hiMsAyAm
 08.2000	Gf^	dIptO
-08.2001	olaRq	kzepe
-08.2002	GaR^	
-08.2003	vfR^	BakzaRe
-08.2004	san^	AsvAdane
-08.2005	inv	
+08.2001	olaRqa~	kzepe
+08.2002	GaRa~^	
+08.2003	vfRa~^	BakzaRe
+08.2004	sana~^	AsvAdane
+08.2005	inva~	
 09.2000	jinana	
 09.2001	ji\	darSane
 09.2002	jri	vfdDO
@@ -774,24 +774,24 @@ code	dhatu	artha
 09.2017	hF\	
 09.2018	sF	hiMsAyAm
 09.2019	spF	hiMsAyAm
-09.2020	hew	
-09.2021	heQ	
-09.2022	graT	banDane
-09.2023	maT^	viloqane
-09.2024	SraT^	
-09.2025	Cid\	Cedane
-09.2026	skaB	
-09.2027	skamB	
-09.2028	skumB	grahaRe
-09.2029	staB	DAraRe
-09.2030	stamB	DAraRe
-09.2031	stumB	stamBe
-09.2032	uB	saMvaraRe
-09.2033	dam\	
-09.2034	Sam^	prayatne
-09.2035	inv^	
-09.2036	uz	dAhe
-09.2037	uDras	uYCe
+09.2020	hewa~	
+09.2021	heQa~	
+09.2022	graTa~	banDane
+09.2023	maTa~^	viloqane
+09.2024	SraTa~^	
+09.2025	Cida~\	Cedane
+09.2026	skaBa~	
+09.2027	skamBa~	
+09.2028	skumBa~	grahaRe
+09.2029	staBa~	DAraRe
+09.2030	stamBa~	DAraRe
+09.2031	stumBa~	stamBe
+09.2032	uBa~	saMvaraRe
+09.2033	dama~\	
+09.2034	Sama~	prayatne
+09.2035	inva~^	
+09.2036	uza~	dAhe
+09.2037	uDrasa~	uYCe
 10.2000	sAmaya	darSane
 10.2001	BI^	Baye
 10.2002	jrI	vfdDO
@@ -820,7 +820,7 @@ code	dhatu	artha
 10.2025	piYja~	
 10.2026	SiYja~\	BAzAyAm
 10.2027	vaja~	gatO
-10.2028	vIja~^	
+10.2028	vIja~	
 10.2029	awwa~	
 10.2030	BaRwa~	
 10.2031	Bawa~	DAraRe
@@ -862,7 +862,7 @@ code	dhatu	artha
 10.2067	KuRqa~	Bedane
 10.2068	lAqa~	kzepe
 10.2069	laRqa~	kzepe
-10.2070	mfqa~^	
+10.2070	mfqa~	
 10.2071	naqa~	patane
 10.2072	olaRqa~	kzepe
 10.2073	paRqa~	gatO
