@@ -17,7 +17,7 @@ use crate::args::{
     Agama as A, Aupadeshika as Au, DhatuPada, Gana, Lakara, Purusha, Tin, Vacana, Vikarana as V,
 };
 use crate::core::operators as op;
-use crate::core::{Code, Morph, Prakriya, PrakriyaTag as PT, Tag as T};
+use crate::core::{Code, Morph, Prakriya, PrakriyaTag as PT, Rule, Tag as T};
 use crate::it_samjna;
 use crate::misc::uses_sip_vikarana;
 
@@ -167,16 +167,22 @@ fn siddhi(p: &mut Prakriya, la: Lakara) -> Option<()> {
 
         // Special case: when sip-vikaraṇa was applied AND the pratyaya is
         // sip (2sg paras), the modal-a-agama is optionally omitted. This
-        // gives the Vedic s-aorist 2sg paras forms like yakzi, vakzi
-        // (vs. agama-inserted yakzasi). 8.2.36 + 8.2.41 + sandhi fire on
-        // the no-agama branch giving the corpus form.
+        // gives the Vedic 2sg paras forms like yakzi, vakzi (vs. agama-inserted
+        // yakzasi). 8.2.36 + 8.2.41 + sandhi fire on the no-agama branch giving
+        // the corpus form. NOTE: this is not licensed by any Pāṇinian sūtra or
+        // vārttika — Kāśikā 3.4.94 says the aṭ/āṭ agama comes obligatorily
+        // (paryāyeṇa). The RV tags these as subjunctive, but Macdonell (Vedic
+        // Grammar §451, p.336) lists yakzi (yaj), vakzi (vah) and Srozi (Sru) in
+        // one paradigm as root-class present 2sg "with imperative sense" — which
+        // is also why the optional-sip set in vikarana.rs is exactly yaj/vah/Sru.
+        // We cite that attestation via Rule::Anyatra rather than a fabricated code.
         let has_sip_vikarana = p.terms().iter().any(|t| t.is(crate::args::Vikarana::sip));
         let skip_agama = has_sip_vikarana && p.has(i, |t| t.is(Tin::sip));
 
         let mut agama_inserted = true;
         if skip_agama {
             // Optional no-agama branch.
-            let skipped = p.optional_run("3.4.94.v2", |p| {
+            let skipped = p.optional_run(Rule::Anyatra("leT 2sg paras sib-vikarana with no aT/AT agama -- yakzi (yaj) vakzi (vah) Srozi (Sru); RV tags subjunctive but Macdonell Vedic Grammar 451 p336 lists these as root-class present 2sg with imperative sense -- RV 1.75.5 1.188.3,https://archive.org/details/cu31924023050325/page/336"), |p| {
                 p.set(i, |t| t.add_tag(T::pit));
             });
             if skipped {
@@ -225,51 +231,53 @@ fn siddhi(p: &mut Prakriya, la: Lakara) -> Option<()> {
             p.optional_run_at("3.4.98", i, op::antya_lopa);
         }
 
-        // 3.4.93 generalized for leṬ ātmanepada: e → ai (E in SLP1).
-        // Under leṬ, atm pratyayas have an alternate -ai-final form. Corpus:
-        // anaśāmahai/bravāvahai/kṛṇavai (Uttama), yajātai (3sg).
+        // 3.4.96 (vaito'nyatra) for leṬ ātmanepada: e → ai (E in SLP1),
+        // optionally (vā). Kāśikā: leṭsambandhina ekārasya vaikārādeśo bhavati.
+        // Corpus: anaśāmahai/bravāvahai/kṛṇavai (Uttama), yajātai (3sg).
         //
         // Excluded: non-Uttama atm DUAL cells, which already get the dual
-        // -aite (= -Ete in SLP1) form via 3.4.95 ata→ai. Adding a further
-        // e→ai there would give the overgenerated -EtE form (e.g.,
-        // mantrayEtE) which isn't corpus-attested.
+        // -aite (= -Ete in SLP1) form via 3.4.95 ata→ai (anyatra). Adding a
+        // further e→ai there would give the overgenerated -EtE form (e.g.,
+        // mantrayEtE) which isn't corpus-attested — Kāśikā likewise blocks it
+        // (anyatreti kim? mantrayaite).
         let tin = p.get(i)?;
         let exclude_non_uttama_dual = tin.has_tag(T::Dvivacana) && !p.has_tag(PT::Uttama);
         if tin.is_atmanepada() && tin.has_antya('e') && !exclude_non_uttama_dual {
-            p.optional_run_at("3.4.93", i, op::antya("E"));
+            p.optional_run_at("3.4.96", i, op::antya("E"));
         }
 
-        // 3.4.97 generalized: under leṬ, the final -i of any parasmaipada
-        // pratyaya optionally drops (via vā-anuvṛtti from 3.4.96). Produces
-        // the short forms BavAt, BavAn, BavAs alongside the existing
-        // BavAti, BavAnti, BavAsi. This replaces the earlier Phase 1
-        // T::Nit-fork modeling (which was non-Pāṇinian and triggered a
-        // spurious 1.2.4 cascade producing forms like kurvEte that are not
-        // corpus-attested).
+        // 3.4.97 (itaśca lopaḥ parasmaipadeṣu): under leṬ, the final -i of any
+        // parasmaipada pratyaya optionally drops. Kāśikā: leṭsambandhina ikārasya
+        // parasmaipadaviṣayasya lopo bhavati; vānuvṛtteḥ pakṣe śravaṇam api bhavati
+        // (the vā carries down from 3.4.96). Produces the short forms BavAt,
+        // BavAn, BavAs alongside the retained BavAti, BavAnti, BavAsi. This
+        // replaces the earlier Phase 1 T::Nit-fork modeling (which was
+        // non-Pāṇinian and triggered a spurious 1.2.4 cascade producing forms
+        // like kurvEte that are not corpus-attested).
         //
         // The 1sg Uttama is excluded because the lakāra-derived ṅit-tva
         // does not transfer to the -ni substitute from 3.4.89 (Kāśikā on
         // 3.4.103: lakArAzrayaGitvam AdezAnAM na bhavati). So the -i of -ni
         // is not droppable under this path. The bare-ā 1sg comes from the
-        // separate vārttika 3.4.98.v1 below.
+        // separate Anyatra-cited Vedic form below.
         let tin = p.get(i)?;
         if tin.is_parasmaipada()
             && tin.has_antya('i')
             && !(tin.has_tag(T::Uttama) && tin.has_tag(T::Ekavacana))
         {
-            p.optional_run_at("3.4.97.v1", i, op::antya_lopa);
+            p.optional_run_at("3.4.97", i, op::antya_lopa);
         }
 
-        // Vedic vārttika to 3.4.98: under leṬ Uttama 1sg paras, the pratyaya
-        // optionally luk-elides entirely, yielding the bare-ā 1sg subjunctive
-        // (RV: 31 attested forms — kṛṇavā, bharā, bravā, stavā, arcā, ayā,
-        // karā, vocā, etc.). For bhū this gives bhavā alongside bhavāni.
-        // See vārttika 3.4.98.v1 in data/varttikas.tsv.
-        // See also Macdonell's Vedic grammar for leṭ (from laṭ stem)
-        // https://archive.org/details/cu31924023050325/page/n325/mode/2up
+        // Bare-ā 1sg subjunctive: under leṬ Uttama 1sg paras, the pratyaya
+        // optionally luk-elides entirely, yielding kṛṇavā, bharā, bravā, stavā,
+        // arcā, ayā, etc. (~19 forms in the RV). For bhū this gives bhavā
+        // alongside bhavāni. This is not from any Pāṇinian sūtra (the leṬ sūtras
+        // yield bhavāt via 3.4.97 and bhavāni via 3.4.89, not the endingless
+        // -ā); it is the Vedic 1sg subjunctive in -ā documented by Macdonell,
+        // Vedic Grammar §471 p347 (kṛṇavā, hinavā). Cited via Rule::Anyatra.
         let tin = p.get(i)?;
         if p.has_tag(PT::Uttama) && tin.has_tag(T::Ekavacana) && tin.is_parasmaipada() {
-            p.optional_run_at("3.4.98.v1", i, op::lopa);
+            p.optional_run_at(Rule::Anyatra("leT uttamapurusa ekavacana bare-A subjunctive (RV ~19 forms) -- kfRavA hinavA bravA stavA arcA; Macdonell Vedic Grammar 471 p347 -- RV 10.95.2 10.39.5 2.11.6,https://archive.org/details/cu31924023050325/page/347"), i, op::lopa);
         }
 
         // Note: Vedic pādānta lengthening (final -a → -ā at line-end) is

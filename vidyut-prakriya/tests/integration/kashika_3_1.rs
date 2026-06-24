@@ -383,7 +383,7 @@ fn sutra_3_1_34() {
     assert_has_tip(&[], &d("tF", Bhvadi), Let, &["tArizat"]);
     assert_has_tip(&[], &d("madi~", Bhvadi), Let, &["mandizat"]);
 
-    // For non-3.4.97 dhātus, 3.4.97 generalized as optional (3.4.97.v1)
+    // For non-3.4.97 dhātus, 3.4.97 (optional, itaśca lopaḥ parasmaipadeṣu)
     // produces both -ti (long) and -t (short, via final -i drop) forms.
     assert_has_tip(&[], &d("patx~", Bhvadi), Let, &["patAti", "patAt"]);
     assert_has_tip(
