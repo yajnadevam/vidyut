@@ -16,26 +16,27 @@ use vidyut_prakriya::args::Lakara::*;
 
 /// Full bhū parasmaipada paradigm under leṬ — Macdonell §159.
 ///
-/// Locks in Phase 1's full output (pit/Nit fork + 3.4.89 mip→ni under leṬ +
-/// 3.4.98 optional s-lopa for Uttama + 3.4.98.v1 vārttika for bare-`ā` 1sg).
-/// All 9 cells covered.
+/// Locks in Phase 1's full output: 3.4.89 mip→ni under leṬ + 3.4.97
+/// (itaśca lopaḥ parasmaipadeṣu, optional) for the long/short alternation +
+/// 3.4.98 optional s-lopa for Uttama + the Vedic bare-`ā` 1sg (Macdonell
+/// §471, cited via Anyatra). All 9 cells covered.
 #[test]
 fn bhu_let_paradigm_159() {
     let bhu = d("BU", Bhvadi);
 
-    // 3rd person — pit/Nit fork (3.4.94 + 3.4.94.v1 → 3.4.100).
+    // 3rd person — optional final -i drop (3.4.97).
     assert_has_tip(&[], &bhu, Let, &["BavAti", "BavAt"]);
     assert_has_tas(&[], &bhu, Let, &["BavAtaH"]);
     assert_has_jhi(&[], &bhu, Let, &["BavAnti", "BavAn"]);
 
-    // 2nd person — pit/Nit fork.
+    // 2nd person — same optional final -i drop.
     assert_has_sip(&[], &bhu, Let, &["BavAsi", "BavAH"]);
     assert_has_thas(&[], &bhu, Let, &["BavATaH"]);
     assert_has_tha(&[], &bhu, Let, &["BavATa"]);
 
-    // 1sg — bhavāni (pit-branch + 3.4.89 mip→ni) and bhavā (3.4.98.v1
-    // vārttika luk-elision). bhavān is suppressed: lakāra-derived Nit-tva
-    // does not transfer to the -ni substitute (Kāśikā on 3.4.103).
+    // 1sg — bhavāni (3.4.89 mip→ni) and bhavā (Vedic bare-ā 1sg, Anyatra/Macdonell §471).
+    // bhavān is suppressed: lakāra-derived ṅit-tva does not transfer to
+    // the -ni substitute (Kāśikā on 3.4.103).
     assert_has_mip(&[], &bhu, Let, &["BavAni", "BavA"]);
 
     // 1du / 1pl — both s-lopa-applied and s-retained, per the vārttika

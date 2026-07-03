@@ -441,11 +441,19 @@ fn try_run_for_dhatu_pratyaya(p: &mut Prakriya, i: usize) -> Option<()> {
         } else if pratyaya.has_lakara(AshirLin) && !pratyaya.is_ardhadhatuka() {
             p.add_tag_at("3.4.116", i, T::Ardhadhatuka);
         } else if pratyaya.has_lakara(Let) {
-            let i_dhatu = p.find_last_where(|t| t.is_dhatu())?;
-            let dhatu = p.get(i_dhatu)?;
-            if dhatu.has_u("qukf\\Y") {
-                p.add_tag_at("3.4.117", i, T::Sarvadhatuka);
-            }
+            // 3.4.113 (tiṅ-śit sārvadhātukam) makes all tiṅ-pratyayas
+            // sārvadhātuka by default. In Vedic chandas, 3.4.117
+            // (chandasy ubhayathā) allows leṬ to be either sārvadhātuka or
+            // ārdhadhātuka. We mark all leṬ pratyayas as sārvadhātuka to
+            // get correct guṇa application for class 5/7/8/9 vikaraṇas.
+            p.add_tag_at("3.4.117", i, T::Sarvadhatuka);
+            // Per 3.4.94 (leṭo'ḍāṭau) interpretation, leṬ pratyayas are pit by
+            // default. We tag pit here (rather than in tin_pratyaya::siddhi
+            // where 3.4.94 fires) so atidesha rule 1.2.4 (sārvadhātukam apit)
+            // does not falsely fire and ngit-tag the pratyaya — which would
+            // cascade into 6.4.111 (śnasor allopaḥ) dropping the initial `a`
+            // of √as (producing `san` instead of `asan` for 3pl leṬ).
+            p.add_tag_at("3.4.94", i, T::pit);
         } else if pratyaya.has_tag_in(&[T::Tin, T::Sit]) {
             if !pratyaya.is_sarvadhatuka() {
                 p.add_tag_at("3.4.113", i, T::Sarvadhatuka);

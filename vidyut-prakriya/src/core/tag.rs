@@ -362,6 +362,14 @@ pub enum PrakriyaTag {
     FlagHasAnitKsa,
     FlagHasSetSic,
 
+    /// Build *leṬ* on the *luṄ* (aorist) stem. Set only when `lakara` is `Let`
+    /// and the caller chose `LetStem::Lun`. Absence of both this flag and
+    /// `FlagLetStemLit` means the present-stem (*laṬ*) path — the historical
+    /// default.
+    FlagLetStemLun,
+    /// Build *leṬ* on the *liṬ* (perfect / reduplicated) stem.
+    FlagLetStemLit,
+
     // Placeholder for From<Tag> default case.
     Nothing,
 }

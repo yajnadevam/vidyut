@@ -26,7 +26,6 @@ use crate::core::operators as op;
 use crate::core::{Morph, Prakriya, PrakriyaTag as PT, Rule, Rule::Varttika, Tag as T, Term};
 use crate::dhatu_gana::{DYUT_ADI, PUSH_ADI};
 use crate::it_samjna;
-use crate::misc::uses_sip_vikarana;
 use crate::sounds::{s, Set, IK};
 
 const SHAL: Set = s(&["Sal"]);
@@ -621,15 +620,43 @@ pub fn run(p: &mut Prakriya) -> Option<()> {
             p.run(code, add_vikarana(sya));
         }
     } else if last.has_lakara(Let) {
-        if uses_sip_vikarana(p, i_dhatu) {
-            // jozizat, mandizat, tArizat
-            p.run("3.1.34", add_vikarana(sip));
-
+        if p.has_tag(PT::FlagLetStemLun) {
+            // Phase 4: leṬ built on the लुङ् (aorist) stem. Run the standard
+            // luṄ vikaraṇa chain (3.1.43-3.1.66 — cli → ksa/caN/aN/sic). The
+            // leṬ-specific pratyaya rules (3.4.94 agama, 3.4.97 i-drop,
+            // 3.4.98 luk, etc.) still apply on top because the *pratyaya*
+            // remains leṬ regardless of which stem it sits on.
+            add_lun_vikarana(p);
+        } else if p.has_tag(PT::FlagLetStemLit) {
+            // Phase 5: leṬ built on the लिट् (perfect) stem. The perfect
+            // takes no vikaraṇa — reduplication via dvitva will form the
+            // stem later. Nothing to do here.
+        } else {
+            // Default: present-stem (लट्-stem) leṬ.
+            //
+            // 3.1.34 (siB bahulaM leTi): sip-vikaraṇa fires "frequently" under
+            // leṬ. For the well-attested triad juz/mand/tF, vidyut applies it
+            // mandatorily (giving jozizat/mandizat/tArizat). For other dhātus
+            // (yaj, vah, śru) where corpus shows BOTH a sip-form (yakzi, vakzi,
+            // Srozi) and a non-sip form (yajāti, vahāti, śṛṇavat), we make it
+            // OPTIONAL so both branches are produced.
             let dhatu = p.get(i_dhatu)?;
-            if dhatu.has_u("tF") {
-                // sib bahulaM RidvaktavyaH
-                // tArizat
-                p.run_at(Varttika("3.1.34.1"), i_dhatu + 1, |t| t.add_tag(T::Rit));
+            let is_mandatory_sip = dhatu.has_text_in(&["juz", "mand"]) || dhatu.has_u("tF");
+            let is_optional_sip = dhatu.has_text_in(&["yaj", "vah", "Sru"]);
+
+            if is_mandatory_sip {
+                // jozizat, mandizat, tArizat
+                p.run("3.1.34", add_vikarana(sip));
+                let dhatu = p.get(i_dhatu)?;
+                if dhatu.has_u("tF") {
+                    // sib bahulaM RidvaktavyaH
+                    // tArizat
+                    p.run_at(Varttika("3.1.34.1"), i_dhatu + 1, |t| t.add_tag(T::Rit));
+                }
+            } else if is_optional_sip {
+                // yakzi, vakzi, Srozi (corpus): optional sip-vikaraṇa for 2sg
+                // paras + others. The non-sip branch produces regular leṬ.
+                p.optional_run("3.1.34", add_vikarana(sip));
             }
         }
     } else if last.has_lakara(Lot) {
@@ -641,7 +668,9 @@ pub fn run(p: &mut Prakriya) -> Option<()> {
 
     let i_last = p.find_last_where(|t| t.is_tin() || t.is_sarvadhatuka())?;
     let last = p.get(i_last)?;
-    if !last.has_lakara_in(&[Lit, Lut, Lrt, Lrn, Lun, AshirLin]) {
+    // leṬ-on-liṭ takes no vikaraṇa — the perfect stem is built by dvitva.
+    let skip_for_let_lit_stem = last.has_lakara(Let) && p.has_tag(PT::FlagLetStemLit);
+    if !last.has_lakara_in(&[Lit, Lut, Lrt, Lrn, Lun, AshirLin]) && !skip_for_let_lit_stem {
         add_sarvadhatuka_vikarana(p);
     }
 

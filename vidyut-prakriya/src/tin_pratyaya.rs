@@ -17,7 +17,7 @@ use crate::args::{
     Agama as A, Aupadeshika as Au, DhatuPada, Gana, Lakara, Purusha, Tin, Vacana, Vikarana as V,
 };
 use crate::core::operators as op;
-use crate::core::{Code, Morph, Prakriya, PrakriyaTag as PT, Tag as T};
+use crate::core::{Code, Morph, Prakriya, PrakriyaTag as PT, Rule, Tag as T};
 use crate::it_samjna;
 use crate::misc::uses_sip_vikarana;
 
@@ -124,32 +124,97 @@ fn siddhi(p: &mut Prakriya, la: Lakara) -> Option<()> {
         }
     } else if tin.has_lakara(Let) {
         // 3.4.89 also fires under leṬ — mip → ni in 1sg (parallel to its
-        // application under Loṭ below). Yields BavAni (pit) and BavAn (Nit).
+        // application under Loṭ below). Yields bhavāni in the pit branch.
         if tin.ends_with("mi") {
             op::adesha("3.4.89", p, i, "ni");
         }
 
-        let agama = if uses_sip_vikarana(p, i_dhatu) {
+        // 3.4.94 lewo'qAwO — leṬ takes aṭ or āṭ. We pick based on the
+        // stem-final phonology so the agama produces the right surface
+        // form without relying on a+a sandhi (which doesn't always fire
+        // cleanly across stem+vikaraṇa+agama boundaries):
+        //   - stem ends in 'a' (most class 1, 6, 10): āṭ would duplicate
+        //     the contraction (bhava+ā=bhavā), so use aṭ which becomes
+        //     long via 6.1.101 a+a sandhi. Either gives `bhavāti`.
+        //   - stem ends in consonant (class 2, 5, 7, etc.): use aṭ
+        //     directly; no sandhi to lengthen — matches corpus (e.g.,
+        //     `asat`, not `asāt`).
+        // The earlier `uses_sip_vikarana` carve-out is preserved for
+        // juzī~/tF/madi~ where vidyut adds the sip-vikaraṇa (3.1.34).
+        let prev_text = p
+            .terms()
+            .iter()
+            .take(i)
+            .rev()
+            .find(|t| !t.text.is_empty())
+            .map(|t| t.text.clone())
+            .unwrap_or_default();
+        let stem_ends_in_a = prev_text.ends_with('a');
+        // For leṬ-on-luṄ-stem (Phase 4), always use aṭ — the corpus
+        // consistently shows the short-a agama (karat, śravat, sakat).
+        // 6.1.101 (a+a → ā) handles the a-final-stem cases (manāmahe).
+        let is_lun_stem = p.has_tag(PT::FlagLetStemLun);
+        // For leṬ-on-liṬ-stem (Phase 5), 3.4.94 leaves the choice between
+        // aṭ and āṭ open. The reduplicated perfect stem is consonant-final,
+        // so 6.1.101 sandhi never lengthens — only āṭ gives the long-ā
+        // forms (papṛcāsi). Try both branches.
+        let is_lit_stem = p.has_tag(PT::FlagLetStemLit);
+        let agama = if is_lun_stem || uses_sip_vikarana(p, i_dhatu) || !stem_ends_in_a {
             A::aw
         } else {
             A::Aw
         };
-        // 3.4.94 inserts the agama. The pratyaya is optionally Nit (giving the
-        // short forms BavAt, BavAn, BavAs after 3.4.100) or pit (default,
-        // giving BavAti, BavAnti, BavAsi).
-        let nit_branch = p.optional_run("3.4.94.v1", |p| {
-            p.set(i, |t| t.add_tag(T::Nit));
-            p.insert(i, agama);
-        });
-        if !nit_branch {
-            p.run("3.4.94", |p| {
-                p.set(i, |t| t.add_tag(T::pit));
-                p.insert(i, agama);
-            });
-        }
-        it_samjna::run(p, i).ok()?;
 
-        let i = i + 1;
+        // Special case: when sip-vikaraṇa was applied AND the pratyaya is
+        // sip (2sg paras), the modal-a-agama is optionally omitted. This
+        // gives the Vedic 2sg paras forms like yakzi, vakzi (vs. agama-inserted
+        // yakzasi). 8.2.36 + 8.2.41 + sandhi fire on the no-agama branch giving
+        // the corpus form. NOTE: this is not licensed by any Pāṇinian sūtra or
+        // vārttika — Kāśikā 3.4.94 says the aṭ/āṭ agama comes obligatorily
+        // (paryāyeṇa). The RV tags these as subjunctive, but Macdonell (Vedic
+        // Grammar §451, p.336) lists yakzi (yaj), vakzi (vah) and Srozi (Sru) in
+        // one paradigm as root-class present 2sg "with imperative sense" — which
+        // is also why the optional-sip set in vikarana.rs is exactly yaj/vah/Sru.
+        // We cite that attestation via Rule::Anyatra rather than a fabricated code.
+        let has_sip_vikarana = p.terms().iter().any(|t| t.is(crate::args::Vikarana::sip));
+        let skip_agama = has_sip_vikarana && p.has(i, |t| t.is(Tin::sip));
+
+        let mut agama_inserted = true;
+        if skip_agama {
+            // Optional no-agama branch.
+            let skipped = p.optional_run(Rule::Anyatra("leT 2sg paras sib-vikarana with no aT/AT agama -- yakzi (yaj) vakzi (vah) Srozi (Sru); RV tags subjunctive but Macdonell Vedic Grammar 451 p336 lists these as root-class present 2sg with imperative sense -- RV 1.75.5 1.188.3,https://archive.org/details/cu31924023050325/page/336"), |p| {
+                p.set(i, |t| t.add_tag(T::pit));
+            });
+            if skipped {
+                agama_inserted = false;
+            }
+        }
+        if agama_inserted {
+            // For leṬ-on-liṬ-stem: 3.4.94 leaves aṭ/āṭ open. The default
+            // `agama` value above is aṭ for the consonant-final reduplicated
+            // stem; here we also try āṭ as an optional branch so the long-ā
+            // forms (papṛcāsi, jujozāt) are reachable.
+            if is_lit_stem && agama == A::aw {
+                let inserted_long = p.optional_run("3.4.94", |p| {
+                    p.set(i, |t| t.add_tag(T::pit));
+                    p.insert(i, A::Aw);
+                });
+                if !inserted_long {
+                    p.run("3.4.94", |p| {
+                        p.set(i, |t| t.add_tag(T::pit));
+                        p.insert(i, A::aw);
+                    });
+                }
+            } else {
+                p.run("3.4.94", |p| {
+                    p.set(i, |t| t.add_tag(T::pit));
+                    p.insert(i, agama);
+                });
+            }
+            it_samjna::run(p, i).ok()?;
+        }
+
+        let i = if agama_inserted { i + 1 } else { i };
         let tin = p.get(i)?;
         if tin.has_adi('A') {
             // mantrayEte, mantrayETe ,...
@@ -158,25 +223,69 @@ fn siddhi(p: &mut Prakriya, la: Lakara) -> Option<()> {
             && tin.is_parasmaipada()
             && tin.has_antya('i')
         {
-            // jozizat, tArizat; patAti, ...
+            // jozizat, tArizat (3.4.97 is mandatory for these dhātus).
             p.run_at("3.4.97", i, op::antya_lopa);
         } else if p.has_tag(PT::Uttama) && tin.has_antya('s') {
-            // karavAva, karavAma; karavAvaH, karavAmaH
+            // karavAva, karavAma; karavAvaH, karavAmaH. Covers the vārttika
+            // *leṭsambandhin uttamapuruṣasya sakārasya vā lopo bhavati*.
             p.optional_run_at("3.4.98", i, op::antya_lopa);
         }
 
-        // Vedic vārttika to 3.4.98: under leṬ Uttama 1sg paras, the pratyaya
-        // optionally luk-elides entirely, yielding the bare-ā 1sg subjunctive
-        // (RV: 31 attested forms — kṛṇavā, bharā, bravā, stavā, arcā, ayā,
-        // karā, vocā, etc.). For bhū this gives bhavā alongside bhavāni
-        // (pit) and bhavān (Nit + 3.4.100).
-        // TODO Add vartika/grammar reference in varttikas.tsv
-        // See McDonnell's Vedic grammar for leṭ (from laṭ stem)
-        // https://archive.org/details/cu31924023050325/page/n325/mode/2up
+        // 3.4.96 (vaito'nyatra) for leṬ ātmanepada: e → ai (E in SLP1),
+        // optionally (vā). Kāśikā: leṭsambandhina ekārasya vaikārādeśo bhavati.
+        // Corpus: anaśāmahai/bravāvahai/kṛṇavai (Uttama), yajātai (3sg).
+        //
+        // Excluded: non-Uttama atm DUAL cells, which already get the dual
+        // -aite (= -Ete in SLP1) form via 3.4.95 ata→ai (anyatra). Adding a
+        // further e→ai there would give the overgenerated -EtE form (e.g.,
+        // mantrayEtE) which isn't corpus-attested — Kāśikā likewise blocks it
+        // (anyatreti kim? mantrayaite).
+        let tin = p.get(i)?;
+        let exclude_non_uttama_dual = tin.has_tag(T::Dvivacana) && !p.has_tag(PT::Uttama);
+        if tin.is_atmanepada() && tin.has_antya('e') && !exclude_non_uttama_dual {
+            p.optional_run_at("3.4.96", i, op::antya("E"));
+        }
+
+        // 3.4.97 (itaśca lopaḥ parasmaipadeṣu): under leṬ, the final -i of any
+        // parasmaipada pratyaya optionally drops. Kāśikā: leṭsambandhina ikārasya
+        // parasmaipadaviṣayasya lopo bhavati; vānuvṛtteḥ pakṣe śravaṇam api bhavati
+        // (the vā carries down from 3.4.96). Produces the short forms BavAt,
+        // BavAn, BavAs alongside the retained BavAti, BavAnti, BavAsi. This
+        // replaces the earlier Phase 1 T::Nit-fork modeling (which was
+        // non-Pāṇinian and triggered a spurious 1.2.4 cascade producing forms
+        // like kurvEte that are not corpus-attested).
+        //
+        // The 1sg Uttama is excluded because the lakāra-derived ṅit-tva
+        // does not transfer to the -ni substitute from 3.4.89 (Kāśikā on
+        // 3.4.103: lakArAzrayaGitvam AdezAnAM na bhavati). So the -i of -ni
+        // is not droppable under this path. The bare-ā 1sg comes from the
+        // separate Anyatra-cited Vedic form below.
+        let tin = p.get(i)?;
+        if tin.is_parasmaipada()
+            && tin.has_antya('i')
+            && !(tin.has_tag(T::Uttama) && tin.has_tag(T::Ekavacana))
+        {
+            p.optional_run_at("3.4.97", i, op::antya_lopa);
+        }
+
+        // Bare-ā 1sg subjunctive: under leṬ Uttama 1sg paras, the pratyaya
+        // optionally luk-elides entirely, yielding kṛṇavā, bharā, bravā, stavā,
+        // arcā, ayā, etc. (~19 forms in the RV). For bhū this gives bhavā
+        // alongside bhavāni. This is not from any Pāṇinian sūtra (the leṬ sūtras
+        // yield bhavāt via 3.4.97 and bhavāni via 3.4.89, not the endingless
+        // -ā); it is the Vedic 1sg subjunctive in -ā documented by Macdonell,
+        // Vedic Grammar §471 p347 (kṛṇavā, hinavā). Cited via Rule::Anyatra.
         let tin = p.get(i)?;
         if p.has_tag(PT::Uttama) && tin.has_tag(T::Ekavacana) && tin.is_parasmaipada() {
-            p.optional_run_at("3.4.98.v1", i, op::lopa);
+            p.optional_run_at(Rule::Anyatra("leT uttamapurusa ekavacana bare-A subjunctive (RV ~19 forms) -- kfRavA hinavA bravA stavA arcA; Macdonell Vedic Grammar 471 p347 -- RV 10.95.2 10.39.5 2.11.6,https://archive.org/details/cu31924023050325/page/347"), i, op::lopa);
         }
+
+        // Note: Vedic pādānta lengthening (final -a → -ā at line-end) is
+        // attested in ~6 corpus forms (kṛṇavāmā, carātā, etc.) but is
+        // meter-driven, not phonological. Generating it as a free alternate
+        // produces unattested forms like `bhavātā` 2pl paras that conflict
+        // with the manual kashika test expectations. Deferred to a future
+        // phase that handles meter context.
     } else if tin.has_lakara(Lot) {
         // Applies tin-siddhi rules that apply to just loT.
         if tin.is(Tin::sip) {
@@ -276,27 +385,6 @@ fn siddhi(p: &mut Prakriya, la: Lakara) -> Option<()> {
                 p.run_at("3.4.100", i, op::antya(""));
             }
         }
-    }
-
-    // leṬ Nit-branch: drop final -i for parasmaipada (3.4.100). The leṬ
-    // pratyaya is optionally Nit-tagged in the leṬ block above (alternative to
-    // pit per 3.4.94). The s-lopa for Uttama is not duplicated here — it's
-    // already handled by the optional 3.4.98 in the leṬ block.
-    //
-    // Skip for 1sg Uttama: the lakāra-derived Nit-tva does not propagate to
-    // the `ni` substitute from 3.4.89 (Kashika on 3.4.103: lakArAzrayaGitvam
-    // AdezAnAM na bhavati). So 3.4.100's i-drop should not apply to the i of
-    // -ni. RV corpus confirms: 0 attestations of -an for 1sg paras subj
-    // across 1613 forms; only bhavāni (pit) and bhavā (3.4.98.v1 luk) appear.
-    if la == Lakara::Let
-        && p.has(i, |t| {
-            t.is_parasmaipada()
-                && t.has_tag(T::Nit)
-                && t.has_antya('i')
-                && !(t.has_tag(T::Uttama) && t.has_tag(T::Ekavacana))
-        })
-    {
-        p.run_at("3.4.100", i, op::antya(""));
     }
 
     // liN-only siddhi

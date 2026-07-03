@@ -264,8 +264,8 @@ fn sutra_3_4_94() {
     assert_has_tip(&[], &d("tF", Bhvadi), Let, &["tArizat"]);
     assert_has_tip(&[], &d("madi~", Bhvadi), Let, &["mandizat"]);
 
-    // For non-3.4.97 dhātus, the pit/Nit fork (3.4.94/3.4.94.v1) produces
-    // both the long pit form and the short Nit form (after 3.4.100).
+    // For non-3.4.97 dhātus, 3.4.97 (optional, itaśca lopaḥ parasmaipadeṣu)
+    // produces both the long form and the short form (after final -i drop).
     assert_has_tip(&[], &d("patx~", Bhvadi), Let, &["patAti", "patAt"]);
     assert_has_tip(
         &[],
@@ -279,11 +279,8 @@ fn sutra_3_4_94() {
 fn sutra_3_4_95() {
     assert_has_aataam(&[], &d("matri~", Curadi), Let, &["mantrayEte"]);
     assert_has_aathaam(&[], &d("matri~", Curadi), Let, &["mantrayETe"]);
-    // Under the Nit-branch of the pit/Nit fork, 1.2.4 (sārvadhātukam apit)
-    // ngit-tags the vikaraṇa, triggering 6.4.110 (kf → kur), so kurvEte /
-    // kurvETe are also produced alongside karavEte / karavETe.
-    assert_has_aataam(&[], &d("qukf\\Y", Tanadi), Let, &["karavEte", "kurvEte"]);
-    assert_has_aathaam(&[], &d("qukf\\Y", Tanadi), Let, &["karavETe", "kurvETe"]);
+    assert_has_aataam(&[], &d("qukf\\Y", Tanadi), Let, &["karavEte"]);
+    assert_has_aathaam(&[], &d("qukf\\Y", Tanadi), Let, &["karavETe"]);
 }
 
 #[ignore]
@@ -324,20 +321,9 @@ fn sutra_3_4_98() {
     let kf = d("qukf\\Y", Tanadi);
     // The vārttika *leṭsambandhin uttamapuruṣasya sakārasya vā lopo bhavati*
     // makes the final -s of 1du -vas / 1pl -mas optionally elided under leṬ
-    // (already implemented as 3.4.98). Under the Nit-branch of the pit/Nit
-    // fork, 1.2.4 → 6.4.110 also produces kurv-stem variants.
-    assert_has_vas(
-        &[],
-        &kf,
-        Let,
-        &["karavAva", "karavAvaH", "kurvAva", "kurvAvaH"],
-    );
-    assert_has_mas(
-        &[],
-        &kf,
-        Let,
-        &["karavAma", "karavAmaH", "kurvAma", "kurvAmaH"],
-    );
+    // (implemented as 3.4.98).
+    assert_has_vas(&[], &kf, Let, &["karavAva", "karavAvaH"]);
+    assert_has_mas(&[], &kf, Let, &["karavAma", "karavAmaH"]);
 }
 
 #[test]

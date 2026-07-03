@@ -333,6 +333,13 @@ pub fn run(p: &mut Prakriya) -> Option<()> {
     } else if dhatu.has_tag_in(&[T::Nit, T::anudattet]) && !dhatu.is_empty() {
         // Check `is_empty` is to skip yaN-luk.
         // eDate
+        //
+        // 1.3.12 has no `vā` in Pāṇini — anudāttet/ṅit dhātus take
+        // ātmanepada only, even under leṬ. Vedic register sometimes shows
+        // paras forms of these roots (e.g. RV `aśnavat` for √aś), but
+        // those are Vedic-only and not licensed by the grammar. Per the
+        // "Pāṇinian sanction is the only criterion" principle we do NOT
+        // relax this for leṬ.
         pp.atma("1.3.12");
     } else if dhatu.has_tag_in(&[T::Yit, T::svaritet]) {
         // karoti, kurute

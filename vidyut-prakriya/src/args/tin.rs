@@ -169,9 +169,13 @@ impl Lakara {
 
     /// Returns whether or not this lakara will be termed sArvadhAtuka.
     pub(crate) fn is_sarvadhatuka(&self) -> bool {
+        // Per Pāṇini 3.4.113 (tiṅ-śit sārvadhātukam), all tiṅ-pratyayas are
+        // sārvadhātuka by default. 3.4.115 (liṭ ca) and 3.4.116 (liṅāśiṣi)
+        // carve out liṭ and āśīr-liṅ as ārdhadhātuka. leṬ has no carve-out
+        // and so falls under the default sārvadhātuka classification.
         matches!(
             self,
-            Lakara::Lat | Lakara::Lot | Lakara::Lan | Lakara::VidhiLin
+            Lakara::Lat | Lakara::Lot | Lakara::Lan | Lakara::VidhiLin | Lakara::Let
         )
     }
 
@@ -179,6 +183,28 @@ impl Lakara {
     pub(crate) fn is_ardhadhatuka(&self) -> bool {
         !self.is_sarvadhatuka()
     }
+}
+
+/// Which stem to use under *leṬ*.
+///
+/// Vedic *leṬ* (the subjunctive) is attested on three distinct stems:
+/// the present (*laṬ*) stem, the aorist (*luṄ*) stem, and the perfect
+/// (*liṬ*) stem. Pāṇini's sūtras do not name this distinction directly,
+/// but Vedic usage and traditional commentary recognize it. We expose
+/// the choice as a builder option on `Tinanta`.
+///
+/// When unset, the derivation uses `Lat` (the present-stem path), which
+/// is vidyut's historical default and the most common stem in the corpus.
+#[derive(Clone, Copy, Debug, Eq, Hash, Ord, PartialEq, PartialOrd)]
+#[cfg_attr(feature = "serde", derive(Serialize, Deserialize))]
+#[wasm_bindgen]
+pub enum LetStem {
+    /// Build *leṬ* on the *laṬ* (present) stem. This is the default.
+    Lat,
+    /// Build *leṬ* on the *luṄ* (aorist) stem.
+    Lun,
+    /// Build *leṬ* on the *liṬ* (perfect / reduplicated) stem.
+    Lit,
 }
 
 /// The pada of some *tiṅanta* or *kṛdanta*.
@@ -242,6 +268,7 @@ pub struct Tinanta {
     vacana: Vacana,
     pada: Option<DhatuPada>,
     skip_at_agama: bool,
+    let_stem: Option<LetStem>,
 }
 
 impl Tinanta {
@@ -263,6 +290,7 @@ impl Tinanta {
             vacana,
             pada: None,
             skip_at_agama: false,
+            let_stem: None,
         }
     }
 
@@ -302,6 +330,16 @@ impl Tinanta {
     /// Ashtadhyayi. See the `atmanepada` module for details.
     pub fn pada(&self) -> Option<DhatuPada> {
         self.pada
+    }
+
+    /// (optional) Which stem to use under *leṬ*.
+    ///
+    /// Only meaningful when `lakara() == Lakara::Let`. When `None`, the
+    /// derivation uses `LetStem::Lat` (present-stem *leṬ*), which is
+    /// vidyut's historical default and the most common stem in the
+    /// Vedic corpus.
+    pub fn let_stem(&self) -> Option<LetStem> {
+        self.let_stem
     }
 
     /// Returns an updated version of `self` with the given `dhatu`.
@@ -346,6 +384,7 @@ pub struct TinantaArgsBuilder {
     vacana: Option<Vacana>,
     pada: Option<DhatuPada>,
     skip_at_agama: bool,
+    let_stem: Option<LetStem>,
 }
 
 impl TinantaArgsBuilder {
@@ -394,6 +433,15 @@ impl TinantaArgsBuilder {
         self
     }
 
+    /// Sets which stem to use under *leṬ*.
+    ///
+    /// Only meaningful when `lakara` is `Lakara::Let`. If unset, the
+    /// derivation uses `LetStem::Lat` (present-stem *leṬ*).
+    pub fn let_stem(mut self, val: LetStem) -> Self {
+        self.let_stem = Some(val);
+        self
+    }
+
     /// Converts the arguments in this builder into a `TinantaArgs` struct.
     ///
     /// `build()` will fail if any args are missing.
@@ -421,6 +469,7 @@ impl TinantaArgsBuilder {
             },
             pada: self.pada,
             skip_at_agama: self.skip_at_agama,
+            let_stem: self.let_stem,
         })
     }
 }
